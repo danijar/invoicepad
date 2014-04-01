@@ -10,12 +10,12 @@ Database Structure
     | name        |       | user        |       | user        |       | project     |
     | mail        |       | customer    |       | invoice     |       | message     |
     | password    |       | date        |       | name        |       | start       |
-    | logo        |       | consecutive |       | description |       | end         |
+    | logo        |       | counter     |       | description |       | end         |
     +-------------+       | number      |       | deadline    |       +-------------+
-     1 (*) |              | (value)     |       | value       |
-           |              | pdf         |       | (hours)     |
-           |              +-------------+       | agreement   |
-           |                   * |              | finished    |
+     1 (*) |              | (value)     |       | agreement   |
+           |              | pdf         |       | finished    |
+           |              +-------------+       | value       |
+           |                   * |              | hours       |
            |                     |              +-------------+
            |                   1 |
            |              +-------------+
@@ -25,8 +25,11 @@ Database Structure
                           | user        |
                           | name        |
                           | mail        |
-                          | official    |
-                          | address     |
+                          | website     |
+                          | fullname    |
+                          | address1    |
+                          | address2    |
+                          | address3    |
                           | ustid       |
                           | notes       |
                           | logo        |
