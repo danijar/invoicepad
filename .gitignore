@@ -1,0 +1,10 @@
+# python
+*.pyc
+
+# virtual environment
+app/lib
+app/include
+app/scripts
+
+# database
+app/invoicepad/db.sqlite3
