@@ -1,10 +1,11 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils.timezone import now
+from customer.models import Customer
 
 class Invoice(models.Model):
 	user     = models.ForeignKey(User)
-	customer = models.ForeignKey('Customer')
+	customer = models.ForeignKey(Customer)
 	date     = models.DateField(default=now, null=True, blank=True)
 	counter  = models.PositiveIntegerField()
 	number   = models.PositiveIntegerField()
