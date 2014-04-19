@@ -18,7 +18,7 @@ class Project(models.Model):
 
 class Time(models.Model):
 	project = models.ForeignKey(Project)
-	message = models.TextField()
+	message = models.CharField(max_length=127)
 	start   = models.DateTimeField(default=now)
 	end     = models.DateTimeField(null=True, blank=True)
 	def __str__(self):

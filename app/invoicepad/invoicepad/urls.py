@@ -1,10 +1,10 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
 
-urlpatterns = patterns('',
-    # Examples:
-    # url(r'^$', 'invoicepad.views.home', name='home'),
-    # url(r'^blog/', include('blog.urls')),
 
+urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^$', 'invoicepad.views.index', name='index'),
+    url(r'^customers/', 'customer.views.listing', name='customers'),
+    url(r'^customer/((?P<id>[0-9]+)/)?', 'customer.views.single', name='customer'),
 )
