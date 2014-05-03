@@ -4,14 +4,14 @@
     <facet type="django" name="Django">
       <configuration>
         <option name="rootFolder" value="$MODULE_DIR$" />
-        <option name="settingsModule" value="invoicepad/invoicepad/settings.py" />
-        <option name="manageScript" value="" />
+        <option name="settingsModule" value="invoicepad/settings.py" />
+        <option name="manageScript" value="manage.py" />
       </configuration>
     </facet>
   </component>
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
-      <sourceFolder url="file://$MODULE_DIR$/invoicepad" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/invoicepad2" isTestSource="false" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
