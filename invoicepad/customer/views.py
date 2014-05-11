@@ -1,15 +1,18 @@
 import json
+import urllib.request
 
-from django.shortcuts import render, get_object_or_404
+from django.core.files.base import ContentFile
+from django.shortcuts import get_object_or_404
 from django.http import HttpResponse, HttpResponseBadRequest
 from django.forms.models import model_to_dict
 from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth.models import User
 
 from customer.models import Customer
 
 
-@csrf_exempt # for development
-def listing(request):
+@csrf_exempt
+def customers(request):
     # if not request.user.is_authenticated():
     #     return HttpResponse('Unauthorized', status=401)
     models = Customer.objects.filter(user=1) # request.user
@@ -18,8 +21,8 @@ def listing(request):
     return HttpResponse(string, content_type='application/json')
 
 
-@csrf_exempt # for development
-def single(request, id):
+@csrf_exempt
+def customer(request, id):
     # if not request.user.is_authenticated():
     #     return HttpResponse('Unauthorized', status=401)
     if request.method == 'POST':
@@ -36,8 +39,22 @@ def single(request, id):
 
 
 def create(request):
+    # get the example user for testing
+    user = User.objects.get(id=1)
+
+    # get request body
     values = json.loads(request.body.decode('utf-8'))
-    return HttpResponse('Create customer with ' + str(values))
+
+    # add user foreign key relation
+    values['user'] = user
+
+    # fetch logo from url
+    if values['logo']:
+        values['logo'] = ContentFile(urllib.request.urlopen(values['logo']).read(), 'test.png')
+
+    # save model and respond with validated values
+    model = Customer.objects.create(**values)
+    return HttpResponse('Created customer with ' + str(values))
 
 
 def select(request, id):

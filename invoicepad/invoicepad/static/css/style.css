@@ -1,0 +1,25 @@
+/* general */
+body { font-size: 10px; margin: 0; font-family: 'Open Sans', sans-serif; }
+
+/* layout */
+article { font-size: 1.5em; }
+
+/* text */
+h1:first-child { margin-top: 0; }
+h1 { font-size: 2.00em; color: #444; }
+h2 { font-size: 1.65em; color: #666; }
+a { color: #07c; text-decoration: none; }
+a:hover { border-bottom: 1px solid; }
+
+/* input */
+input, a.button { padding: .5em; font-size: .9em; font-family: Arial, sans-serif; border: 1px solid #aaa; }
+input[type=email], input[type=password], a.button { padding: .5em; background: #fff; border: 1px solid #aaa; }
+input[type=submit], input[type=button], a.button { color: #000; text-decoration: none; background: #ddd; cursor: pointer; }
+
+/* elements */
+.message { padding: .5em; background: rgba(50, 200, 50, 0.2); border: 2px solid rgb(50, 200, 50); }
+
+/* style */
+body { background: #272822; }
+.present { position: absolute; box-sizing: border-box; left: 50%; top: 50%; -webkit-transform: translate(-50%, -75%); max-width: 90%; padding: 1.5em; background: #eee; border-radius: .5em; }
+.present { box-shadow: 0 0 1em rgba(0, 0, 0, .5), 0 0 100em rgba(184, 165, 131, .5); }
