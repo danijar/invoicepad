@@ -7,6 +7,7 @@ requirejs.config({
         text:       '../lib/text-2.0.12/text',
         css:        '../lib/require-css-0.1.2/css',
         template:   '../template',
+        style:      '../css',
     },
     shim: {
         jquery: {
@@ -18,6 +19,7 @@ requirejs.config({
     }
 });
 
-require(['jquery', 'underscore'], function ($, _) {
-    $('article h1').first().after('<p class="message">Frontend system loaded.</p>');
+require(['user/test'], function (Test) {
+    // Interface to test AJAX calls to backend
+    Test();
 });
