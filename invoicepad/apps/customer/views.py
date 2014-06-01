@@ -8,7 +8,7 @@ from django.forms.models import model_to_dict
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.models import User
 
-from customer.models import Customer
+from apps.customer.models import Customer
 
 
 @csrf_exempt

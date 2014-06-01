@@ -2,14 +2,14 @@
 <html>
 <head>
     <title>Invoice Pad</title>
-    <script data-main="{% static "js/main" %}" src="{% static "libs/require-2.1.11/require.js" %}"></script>
+    <script data-main="{% static "js/main" %}" src="{% static "lib/require-2.1.11/require.js" %}"></script>
     <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet" type="text/css">
     <link href="{% static "css/style.css" %} "rel="stylesheet" type="text/css">
 </head>
 <body>
     <article class="present">
         <h1>Invoice Pad</h1>
-        <p>After you finish your sesseion, you can <a href="{% url 'logout' %}">log out</a>.</p>
+        <p>You are logged in. After you finished your session, you can <a href="{% url 'logout' %}">log out</a>.</p>
     </article>
 </body>
 </html>

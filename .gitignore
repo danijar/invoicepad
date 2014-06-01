@@ -8,3 +8,6 @@
 
 # database
 /invoicepad/db.sqlite3
+
+# user uploaded files
+/invoicepad/media/

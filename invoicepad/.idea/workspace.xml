@@ -32,13 +32,20 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="settings.py" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/invoicepad/settings.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="97" column="55" selection-start="2244" selection-end="2244" vertical-scroll-proportion="0.71603566" vertical-offset="1006" max-vertical-offset="1904">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="views.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/customer/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="74" column="0" selection-start="2329" selection-end="2329" vertical-scroll-proportion="0.0" vertical-offset="170" max-vertical-offset="1360">
-              <folding>
-                <element signature="e#0#11#0" expanded="true" />
-              </folding>
+            <state line="74" column="0" selection-start="2329" selection-end="2329" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1190">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -46,7 +53,7 @@
       <file leaf-file-name="views.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/invoicepad/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="4" column="0" selection-start="132" selection-end="132" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="867">
+            <state line="4" column="0" selection-start="132" selection-end="132" vertical-scroll-proportion="0.0" vertical-offset="68" max-vertical-offset="901">
               <folding />
             </state>
           </provider>
@@ -55,16 +62,16 @@
       <file leaf-file-name="public.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/invoicepad/template/public.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="8" column="34" selection-start="300" selection-end="300" vertical-scroll-proportion="-5.230769" vertical-offset="0" max-vertical-offset="340">
+            <state line="7" column="6" selection-start="265" selection-end="265" vertical-scroll-proportion="0.0" vertical-offset="119" max-vertical-offset="340">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="style.css" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="style.css" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/invoicepad/static/css/style.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="25" column="0" selection-start="1130" selection-end="1130" vertical-scroll-proportion="0.4722222" vertical-offset="0" max-vertical-offset="900">
+            <state line="25" column="0" selection-start="1130" selection-end="1130" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="527">
               <folding />
             </state>
           </provider>
@@ -113,20 +120,20 @@
         <option value="$PROJECT_DIR$/invoicepad/invoicepad/settings.py" />
         <option value="$PROJECT_DIR$/invoicepad/invoicepad/template/core/index.html" />
         <option value="$PROJECT_DIR$/invoicepad/invoicepad/views.py" />
-        <option value="$PROJECT_DIR$/invoicepad/settings.py" />
         <option value="$PROJECT_DIR$/invoicepad/static/css/login.css" />
-        <option value="$PROJECT_DIR$/invoicepad/urls.py" />
         <option value="$PROJECT_DIR$/invoicepad/template/index.html" />
         <option value="$PROJECT_DIR$/invoicepad/template/login.html" />
         <option value="$PROJECT_DIR$/invoicepad/views.py" />
         <option value="$PROJECT_DIR$/customer/views.py" />
         <option value="$PROJECT_DIR$/invoicepad/template/public.html" />
         <option value="$PROJECT_DIR$/invoicepad/static/css/style.css" />
+        <option value="$PROJECT_DIR$/invoicepad/urls.py" />
+        <option value="$PROJECT_DIR$/invoicepad/settings.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-1928" />
+    <option name="x" value="-8" />
     <option name="y" value="-8" />
     <option name="width" value="1936" />
     <option name="height" value="1056" />
@@ -191,6 +198,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -297,7 +305,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -519,6 +526,9 @@
       <option name="PARAMETERS" value="" />
       <method />
     </configuration>
+    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug" singleton="true">
+      <method />
+    </configuration>
     <configuration default="true" type="tests" factoryName="Unittests">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -540,9 +550,6 @@
       <option name="PUREUNITTEST" value="true" />
       <option name="PARAMS" value="" />
       <option name="USE_PARAM" value="false" />
-      <method />
-    </configuration>
-    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug" singleton="true">
       <method />
     </configuration>
     <configuration default="true" type="tests" factoryName="Doctests">
@@ -614,15 +621,15 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1928" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.11980831" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.12087327" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -630,12 +637,12 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32937366" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32937366" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="REST Client" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.37796977" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -659,6 +666,55 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/invoicepad/urls.py">
       <provider selected="true" editor-type-id="text-editor">
+        <state line="12" column="0" selection-start="503" selection-end="503" vertical-scroll-proportion="0.0" vertical-offset="204" max-vertical-offset="306">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/customer/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="74" column="0" selection-start="2329" selection-end="2329" vertical-scroll-proportion="0.0" vertical-offset="170" max-vertical-offset="1360">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/invoicepad/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="0" selection-start="132" selection-end="132" vertical-scroll-proportion="0.0" vertical-offset="68" max-vertical-offset="901">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/invoicepad/template/public.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="6" selection-start="265" selection-end="265" vertical-scroll-proportion="0.0" vertical-offset="119" max-vertical-offset="340">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/invoicepad/static/css/style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="25" column="0" selection-start="1130" selection-end="1130" vertical-scroll-proportion="0.0" vertical-offset="425" max-vertical-offset="527">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/invoicepad/template/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="0" selection-start="567" selection-end="567" vertical-scroll-proportion="0.0" vertical-offset="255" max-vertical-offset="357">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/invoicepad/template/login.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="3" column="16" selection-start="53" selection-end="53" vertical-scroll-proportion="0.0" vertical-offset="51" max-vertical-offset="476">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/invoicepad/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
         <state line="12" column="0" selection-start="503" selection-end="503" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="306">
           <folding />
         </state>
@@ -667,9 +723,7 @@
     <entry file="file://$PROJECT_DIR$/customer/views.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="74" column="0" selection-start="2329" selection-end="2329" vertical-scroll-proportion="0.0" vertical-offset="170" max-vertical-offset="1360">
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -718,9 +772,7 @@
     <entry file="file://$PROJECT_DIR$/customer/views.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="37" column="32" selection-start="1292" selection-end="1292" vertical-scroll-proportion="0.0" vertical-offset="1" max-vertical-offset="1360">
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -746,9 +798,7 @@
     <entry file="file://$PROJECT_DIR$/customer/views.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="25" column="33" selection-start="856" selection-end="856" vertical-scroll-proportion="0.0" vertical-offset="170" max-vertical-offset="1360">
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -769,40 +819,10 @@
         <state line="8" column="37" selection-start="290" selection-end="290" vertical-scroll-proportion="0.13222222" vertical-offset="0" max-vertical-offset="900" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/invoicepad/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="3" selection-start="247" selection-end="247" vertical-scroll-proportion="0.15111111" vertical-offset="0" max-vertical-offset="1768">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/invoicepad/template/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state line="15" column="0" selection-start="567" selection-end="567" vertical-scroll-proportion="0.0" vertical-offset="255" max-vertical-offset="357">
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/invoicepad/template/login.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="16" selection-start="53" selection-end="53" vertical-scroll-proportion="0.0" vertical-offset="51" max-vertical-offset="476">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/invoicepad/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="0" selection-start="503" selection-end="503" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="289">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/customer/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="74" column="0" selection-start="2329" selection-end="2329" vertical-scroll-proportion="0.0" vertical-offset="170" max-vertical-offset="1360">
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -815,14 +835,42 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/invoicepad/template/public.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="34" selection-start="300" selection-end="300" vertical-scroll-proportion="-5.230769" vertical-offset="0" max-vertical-offset="340">
+        <state line="7" column="6" selection-start="265" selection-end="265" vertical-scroll-proportion="0.0" vertical-offset="119" max-vertical-offset="340">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/invoicepad/template/login.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="3" column="16" selection-start="53" selection-end="53" vertical-scroll-proportion="0.0" vertical-offset="51" max-vertical-offset="476">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/invoicepad/static/css/style.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="0" selection-start="1130" selection-end="1130" vertical-scroll-proportion="0.4722222" vertical-offset="0" max-vertical-offset="900">
+        <state line="25" column="0" selection-start="1130" selection-end="1130" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="527">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/customer/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="74" column="0" selection-start="2329" selection-end="2329" vertical-scroll-proportion="0.0" vertical-offset="170" max-vertical-offset="1360">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/invoicepad/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="12" column="0" selection-start="503" selection-end="503" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="289">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/invoicepad/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="97" column="55" selection-start="2244" selection-end="2244" vertical-scroll-proportion="0.71603566" vertical-offset="1006" max-vertical-offset="1904">
           <folding />
         </state>
       </provider>

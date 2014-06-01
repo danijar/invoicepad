@@ -36,10 +36,10 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'customer',
-    'project',
-    'invoice',
-    'dashboard'
+    'apps.customer',
+    'apps.project',
+    'apps.invoice',
+    'apps.dashboard'
 )
 
 MIDDLEWARE_CLASSES = (
@@ -84,15 +84,21 @@ USE_TZ = True
 # Templates
 
 TEMPLATE_DIRS = (
-    os.path.join(BASE_DIR, 'invoicepad/template'),
+    os.path.join(BASE_DIR, 'template'),
 )
 
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/dev/howto/static-files/
 
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+MEDIA_URL = '/media/'
+
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'invoicepad/static'),
+    os.path.join(BASE_DIR, 'static'),
 )
 
 STATIC_URL = '/static/'

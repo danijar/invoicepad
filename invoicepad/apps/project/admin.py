@@ -1,5 +1,5 @@
 from django.contrib import admin
-from project.models import Project, Time
+from apps.project.models import Project, Time
 
 class TimeInline(admin.TabularInline):
 	model = Time

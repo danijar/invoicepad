@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils.timezone import now
-from invoice.models import Invoice
+from apps.invoice.models import Invoice
 
 class Project(models.Model):
 	user        = models.ForeignKey(User)
