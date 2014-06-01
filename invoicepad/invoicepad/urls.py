@@ -9,6 +9,5 @@ urlpatterns = patterns('',
     url(r'^$', 'apps.user.views.index', name='index'),
     url(r'^login/$', 'apps.user.views.login', name='login'),
     url(r'^logout/$', 'apps.user.views.logout', name='logout'),
-    url(r'^customers/', 'apps.customer.views.customers', name='customers'),
     url(r'^customer/((?P<id>[0-9]+)/)?', 'apps.customer.views.customer', name='customer'),
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

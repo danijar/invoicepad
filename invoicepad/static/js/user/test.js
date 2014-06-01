@@ -4,7 +4,7 @@ define(['jquery', 'underscore', 'text!template/test.html', 'css!style/test.css']
 	var element;
 	var template;
 	var presets = [
-		{ name: 'Get all customers', method: 'GET', url: '/customers/', content: '' },
+		{ name: 'Get all customers', method: 'GET', url: '/customer/', content: '' },
 		{ name: 'Get single customer', method: 'GET', url: '/customer/42/', content: '' },
 		{ name: 'Create new customer', method: 'POST', url: '/customer/', content: '{\n    "name": "Customer",\n    "fullname": "",\n    "address1": "",\n    "address2": "",\n    "address3": "",\n    "mail": "",\n    "website": "",\n    "notes": "",\n    "ustid": "",\n    "logo": ""\n}' },
 		{ name: 'Update existing customer', method: 'PUT', url: '/customer/42/', content: '{\n    "name": "Customer",\n    "fullname": "",\n    "address1": "",\n    "address2": "",\n    "address3": "",\n    "mail": "",\n    "website": "",\n    "notes": "",\n    "ustid": "",\n    "logo": ""\n}' },
@@ -78,6 +78,9 @@ define(['jquery', 'underscore', 'text!template/test.html', 'css!style/test.css']
 			var result = JSON.stringify(e, null, 4);
 			message('<pre>' + result + '</pre>');
 		});
+
+		// Don't follow link
+		return false;
 	}
 
 	function preset () {

@@ -1,95 +1,87 @@
 import json
+import uuid
 import urllib.request
 
 from django.core.files.base import ContentFile
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponse, HttpResponseNotFound, HttpResponseBadRequest
-from django.forms.models import model_to_dict
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.models import User
+from django.forms.models import model_to_dict
 
 from apps.customer.models import Customer
-
-
-@csrf_exempt
-def customers(request):
-    if request.user.is_anonymous():
-        return HttpResponse('Unauthorized', status=401)
-    models = Customer.objects.filter(user=request.user)
-    values = models.values('id', 'name', 'website', 'mail', 'logo')
-    string = json.dumps(list(values))
-    return HttpResponse(string, content_type='application/json')
 
 
 @csrf_exempt
 def customer(request, id):
     if request.user.is_anonymous():
         return HttpResponse('Unauthorized', status=401)
-    if request.method == 'POST':
-        return create(request)
-    elif id is not None:
+
+    # Ensure integer type
+    hasid = False
+    if id is not None:
+        hasid = True
         id = int(id)
-        if request.method == 'GET':
-            return select(request, id)
-        elif request.method == 'PUT':
-            return update(request, id)
-        elif request.method == 'DELETE':
-            return delete(request, id)
-    return HttpResponseBadRequest()
 
-
-def create(request):
-    # get request body
-    values = json.loads(request.body.decode('utf-8'))
-
-    # check for needed properties
-    if not 'name' in values:
+    if request.method == 'GET' and hasid:
+        # Get single model
+        model = get_object_or_404(Customer, id=id, user=request.user)
+        return show(model)
+    elif request.method == 'GET':
+        # Get list of all models
+        models = Customer.objects.filter(user=request.user)
+        values = models.values('id', 'name', 'website', 'mail', 'logo')
+        string = json.dumps(list(values))
+        return HttpResponse(string, content_type='application/json')
+    elif request.method == 'POST':
+        # Create new model
+        values = json.loads(request.body.decode('utf-8'))
+        if not 'name' in values:
+            return HttpResponseBadRequest()
+        model = Customer.objects.create(name=values['name'], user=request.user)
+        update(model, values)
+        return show(model)
+    elif request.method == 'PUT' and hasid:
+        # Update existing models
+        model = get_object_or_404(Customer, id=id, user=request.user)
+        values = json.loads(request.body.decode('utf-8'))
+        update(model, values)
+        return show(model)
+    elif request.method == 'DELETE' and hasid:
+        # Delete model
+        model = get_object_or_404(Customer, id=id, user=request.user)
+        model.delete()
+        return HttpResponse()
+    else:
+        # No method available
         return HttpResponseBadRequest()
 
-    # create model and update values
-    model = Customer.objects.create(name=values['name'], user=request.user)
-    return update(request, model.id)
 
-
-def select(request, id):
-    # get customer as dictionary
-    model = get_object_or_404(Customer, id=id, user=request.user)
-    values = model_to_dict(model)
+def show(customer):
+    # get properties
+    values = model_to_dict(customer)
 
     # replace logo object by url
     values['logo'] = values['logo'].url if values['logo'] else ''
 
-    # respond with customer properties
+    # respond
     string = json.dumps(values)
     return HttpResponse(string, content_type='application/json')
 
 
-def update(request, id):
-    # get request body
-    values = json.loads(request.body.decode('utf-8'))
-
-    # filter out forbidden values
-    allowed = ['name', 'fullnane', 'address1', 'address2', 'address3', 'mail', 'website', 'notes', 'ustid', 'logo']
+def update(customer, values):
+    # filter out values which can be modified
     validated = {}
-    for key in allowed:
-        if key in values:
-            validated[key] = values[key]
+    for i in ['name', 'fullnane', 'address1', 'address2', 'address3', 'mail', 'website', 'notes', 'ustid', 'logo']:
+        if i in values:
+            validated[i] = values[i]
 
     # fetch logo from url
     if 'logo' in validated and validated['logo']:
-        validated['logo'] = ContentFile(urllib.request.urlopen(validated['logo']).read(), 'test.png')
+        filename = str(uuid.uuid4()) + '.png'
+        validated['logo'] = ContentFile(urllib.request.urlopen(validated['logo']).read(), filename)
 
-    # update model and respond
-    Customer.objects.filter(id=id, user=request.user).update(**validated)
-    return select(request, id)
-
-
-def delete(request, id):
-    # find model
-    model = Customer.objects.filter(id=id, user=request.user)
-    if not model:
-        return HttpResponseNotFound()
-
-    # delete and respond with ok
-    model.delete()
-    return HttpResponse()
+    # update model
+    for (key, value) in validated.items():
+        setattr(customer, key, value)
+    customer.save()
