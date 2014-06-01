@@ -20,9 +20,5 @@ input[type=submit], input[type=button], a.button { color: #000; text-decoration:
 .message { padding: .5em; background: rgba(50, 200, 50, 0.2); border: 2px solid rgb(50, 200, 50); }
 
 /* style */
-body { background: #272822; }
-/* .present { position: absolute; box-sizing: border-box; left: 50%; top: 50%; -webkit-transform: translate(-50%, -75%); max-width: 90%; padding: 1.5em; background: #eee; border-radius: .5em; } */
-/* .present { box-shadow: 0 0 1em rgba(0, 0, 0, .5), 0 0 100em rgba(184, 165, 131, .5); } */
-
-.present { width: 30%; margin: 2em auto; padding: 1.5em; background: #eee; border-radius: .5em; }
-.present { box-shadow: 0 0 1em rgba(0, 0, 0, .5), 0 0 100em rgba(184, 165, 131, .5); }
+body { background: #132938; }
+.present { width: 30%; margin: 2em auto; padding: 1.5em; background: #eee url(../img/noise.png); border-radius: .5em; box-shadow: 0 0 1em rgba(0, 0, 0, .5), 0 0 100em rgba(117, 177, 206, .5); }

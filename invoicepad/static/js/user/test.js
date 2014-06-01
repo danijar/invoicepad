@@ -25,6 +25,9 @@ define(['jquery', 'underscore', 'text!template/test.html', 'css!style/test.css']
 	}
 
 	function render() {
+		// Trigger redraw to fix boxshadow
+		element.parent().css('transform', 'scale(1)');
+
 		// Set content from template
 		element.html(template({}));
 
