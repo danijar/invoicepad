@@ -1,0 +1,31 @@
+<h1><%= model.name %></h1>
+<p>This is the detail page of a customer.</p>
+<h2>General</h2>
+<label for="name">Name</label>
+<input id="name" type="text" value="<%= model.name %>"/>
+<label for="fullname">Full name</label>
+<input id="fullname" type="text" value="<%= model.fullname %>"/>
+<label for="mail">Email address</label>
+<input id="mail" type="email" value="<%= model.mail %>"/>
+<label for="website">Website</label>
+<input id="website" type="url" value="<%= model.website %>"/>
+<h2>Address</h2>
+<label for="address1">Street and number</label>
+<input id="address1" type="text" value="<%= model.address1 %>"/>
+<label for="address1">Postal code and city</label>
+<input id="address2" type="text" value="<%= model.address2 %>"/>
+<label for="address1">State or nation</label>
+<input id="address3" type="text" value="<%= model.address3 %>"/>
+<h2>Notes</h2>
+<textarea id="notes" rows="7"><%= model.notes %></textarea>
+<h2>Logo</h2>
+<div class="transparent">
+<% if (model.logo) { %>
+	<div class="logo" style="background-image: url(<%= model.logo %>)"></div>
+<% } else { %>
+	<div class="logo"></div>
+<% } %>
+</div><br>
+<p>
+	<a href="" class="button save">Save</a>
+</p>

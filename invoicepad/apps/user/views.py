@@ -6,9 +6,9 @@ from django.views.decorators.csrf import csrf_exempt
 def index(request):
     # When not logged in show public area
     if request.user.is_anonymous():
-        return render(request, 'public/index.html')
+        return render(request, 'public.html')
     # For logged in users show dashboard
-    return render(request, 'dashboard/index.html')
+    return render(request, 'index.html')
 
 
 @csrf_exempt
@@ -22,14 +22,14 @@ def login(request):
 
         # For invalid credentials display message
         if user is None:
-            return render(request, 'user/login.html', {'message': 'The entered username or password was wrong.'})
+            return render(request, 'login.html', {'message': 'The entered username or password was wrong.'})
         # When successful login and redirect to dashboard
         elif user.is_active:
             auth.login(request, user)
             return redirect('index')
         # For disabled accounts display message
         else:
-            return render(request, 'user/login.html', {'message': 'You account is disabled.'})
+            return render(request, 'login.html', {'message': 'You account is disabled.'})
 
     # Access login page
     else:
@@ -38,7 +38,7 @@ def login(request):
             return redirect('index')
         # Otherwise show the page
         else:
-            return render(request, 'user/login.html')
+            return render(request, 'login.html')
 
 
 def logout(request):

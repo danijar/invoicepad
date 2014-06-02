@@ -19,23 +19,38 @@ requirejs.config({
     }
 });
 
-require(['jquery', 'dashboard/index', 'user/test', 'customer/customers'], function($, Index, Test, Customers) {
+require(['jquery', 'view/dashboard', 'view/customers', 'view/customer', 'view/console'],
+	function($, Dashboard, Customers, Customer, Console) {
+
     // Initialize routes
     var routes = {
-        '': new Index(),
-        'test': new Test(),
-        'customer': new Customers(),
+        '/?':                 Dashboard,
+        '/console/?':         Console,
+        '/customer/?':        Customers,
+        '/customer/(\\d+)/?': Customer,
     };
 
     // Listen to route changes
     $(window).on('hashchange', function() {
-        // Extract route
-        var route = window.location.hash;
-        route = route.substr(2).replace(/\/$/g, '');
+        // Find matching route
+        var hash = window.location.hash.substr(1);
+        for (var i in routes) {
+        	// Test regex against current route
+        	var regex = new RegExp('^' + i + '$', 'gm');
+        	var matches = regex.exec(hash);
+        	if (matches) {
+        		// Cleanup old view
+        		$('.content').children().remove();
+
+        		// Create view with captured groups
+        		var args = matches.slice(1, matches.length);
+        		routes[i].apply(undefined, args);
+        		return;
+        	}
+        }
         
-        // Load view
-        if (route in routes)
-            routes[route].render();
+        // No route found
+        console.error("No route matches the hash '" + hash + "'.");
     });
 
     // Load initial view

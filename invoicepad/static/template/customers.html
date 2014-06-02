@@ -2,11 +2,11 @@
 <ul>
 <% _.each(models, function(model) { %>
 	<li>
-		<a href="/#/customer/<%= model.id %>">
+		<a href="/#/customer/<%= model.id %>/">
 			<% if (model.logo) { %>
-				<div style="background-image: url(/media/<%= model.logo %>)"></div>
+				<div class="logo" style="background-image: url(/media/<%= model.logo %>)"></div>
 			<% } else { %>
-				<div style="background-image: url(/static/img/customer/logo.png)"></div>
+				<div class="logo" style="background-image: url(/static/img/customer/logo.png)"></div>
 			<% } %>
 			<h2><%= model.name %></h2>
 		</a>

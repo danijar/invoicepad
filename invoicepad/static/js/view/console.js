@@ -1,4 +1,4 @@
-define(['jquery', 'underscore', 'text!template/test.html', 'css!style/test.css'], function($, _, Template) {
+define(['jquery', 'underscore', 'text!template/console.html', 'css!style/console.css'], function($, _, Template) {
 
 	// Private members
 	var el;
@@ -13,7 +13,7 @@ define(['jquery', 'underscore', 'text!template/test.html', 'css!style/test.css']
 
 	function initialize() {
 		// Add container
-		el = $('<article class="test">');
+		el = $('<article class="console">');
 		
 		// Compile template
 		template = _.template(Template);
@@ -61,9 +61,9 @@ define(['jquery', 'underscore', 'text!template/test.html', 'css!style/test.css']
 
 	function send(e) {
 		// Read inputs
-		var method = $('.test #method').val();
-		var url = $('.test #url').val();
-		var content = $('.test #content').val();
+		var method  = el.find('#method').val();
+		var url     = el.find('#url').val();
+		var content = el.find('#content').val();
 
 		// Send AJAX request
 		var deferred = $.ajax({
@@ -96,11 +96,7 @@ define(['jquery', 'underscore', 'text!template/test.html', 'css!style/test.css']
 
 	function main() {
 		initialize();
-
-		// Return public functions
-		return {
-			render: render,
-		};
+		render();
 	}
 
 	return main;

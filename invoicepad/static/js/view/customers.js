@@ -59,11 +59,7 @@ define(['jquery', 'underscore', 'text!template/customers.html', 'css!style/custo
 
 	function main() {
 		initialize();
-
-		// Return public functions
-		return {
-			render: render,
-		};
+		render();
 	}
 
 	return main;

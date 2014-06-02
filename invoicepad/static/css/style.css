@@ -16,14 +16,15 @@ a { color: #07c; text-decoration: none; }
 a:hover { border-bottom: 1px solid; }
 
 /* input */
-input, a.button { display: inline-block; padding: .5em; font-size: .9em; font-family: Arial, sans-serif; border: 1px solid #aaa; }
-input[type=email], input[type=password], select, textarea, a.button { padding: .5em; background: #fff; border: 1px solid #aaa; }
+input, select, textarea, a.button { display: inline-block; margin: 0 0 1em; padding: .5em; font-size: .9em; font-family: Arial, sans-serif; border: 1px solid #aaa; }
+input[type=text], input[type=password], input[type=email], input[type=url], select, textarea { box-sizing: border-box; width: 100%; padding: .5em; background: #fff; border: 1px solid #aaa; }
 input[type=submit], input[type=button], a.button { color: #000; text-decoration: none; background: #ddd; cursor: pointer; }
+label { display: inline-block; width: 100%; padding: 0 0 .5em; }
+textarea { resize: vertical; }
 
 /* elements */
 .message { padding: .5em; background: rgba(50, 200, 50, 0.2); border: 2px solid rgb(50, 200, 50); }
 
 /* style */
-body { background: #173244 url(../img/shine.png) center no-repeat; }
-/* body:after { content:''; display: block; position: absolute; left: 50%; top: 50%; width: 0; height: 0; box-shadow: 0 0 100em 25em rgba(117, 177, 206, .5); } */
-.content { width: 60%; margin: 3em auto; padding: 1.5em; background: #eee url(../img/noise.png); border-radius: .5em; box-shadow: 0 0 1em rgba(0, 0, 0, .5); z-index: 1; }
+body { background: #173244 url(../img/shine.png) center no-repeat fixed; }
+.content { width: 60%; margin: 3em auto; padding: 1.5em; background: #eee; border-radius: .5em; box-shadow: 0 0 1em rgba(0, 0, 0, .5); z-index: 1; }

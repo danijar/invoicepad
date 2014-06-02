@@ -1,4 +1,4 @@
-define(['jquery', 'underscore', 'text!template/index.html'], function($, _, Template) {
+define(['jquery', 'underscore', 'text!template/dashboard.html'], function($, _, Template) {
 
 	// Private members
 	var el;
@@ -20,11 +20,7 @@ define(['jquery', 'underscore', 'text!template/index.html'], function($, _, Temp
 
 	function main() {
 		initialize();
-
-		// Return public functions
-		return {
-			render: render,
-		};
+		render();
 	}
 
 	return main;
