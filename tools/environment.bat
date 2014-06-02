@@ -1,1 +1,1 @@
-cmd /K "cd .. & scripts\activate.bat & cd invoicepad & cls"
+cmd /K "cd .. & virtualenv\scripts\activate.bat & cd invoicepad & cls"

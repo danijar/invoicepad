@@ -2,9 +2,7 @@
 *.pyc
 
 # virtual environment
-/lib
-/include
-/scripts
+/virtualenv/
 
 # database
 /invoicepad/db.sqlite3
