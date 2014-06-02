@@ -19,11 +19,12 @@ requirejs.config({
     }
 });
 
-require(['jquery', 'dashboard/index', 'user/test'], function($, Index, Test) {
+require(['jquery', 'dashboard/index', 'user/test', 'customer/customers'], function($, Index, Test, Customers) {
     // Initialize routes
     var routes = {
         '': new Index(),
         'test': new Test(),
+        'customer': new Customers(),
     };
 
     // Listen to route changes

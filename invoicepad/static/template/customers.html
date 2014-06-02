@@ -1,0 +1,18 @@
+<h1>Customers</h1>
+<ul>
+<% _.each(models, function(model) { %>
+	<li>
+		<a href="/#/customer/<%= model.id %>">
+			<% if (model.logo) { %>
+				<img src="/media/<%= model.logo %>"/>
+			<% } else { %>
+				<img src="/static/img/customer/logo.png"/>
+			<% } %>
+			<h2><%= model.name %></h2>
+		</a>
+		<% var website = model.website.replace(new RegExp('(^http://www\\.)|(^http://)|(/$)', 'g'), ''); %>
+		<span><a href="<%= model.website %>" target="_blank"><%= website %></a></span>
+		<span><a href="mailto:<%= model.mail %>"><%= model.mail %></a></span>
+	</li>
+<% }); %>
+</ul>
