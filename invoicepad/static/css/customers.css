@@ -3,5 +3,5 @@
 .customers li:hover { background: rgba(0, 0, 0, .025); }
 .customers li > *, .customers li a > * { display: inline-block; vertical-align: middle; margin-right: .5em; }
 .customers li > a:first-child:hover { border-bottom: none; }
-.customers li img { width: 2em; height: 2em; margin-left: .5em; }
+.customers li div { width: 3em; height: 2em; margin-left: .5em; background: center no-repeat; background-size: contain; }
 .customers li h2 { font-size: 1.2em; }

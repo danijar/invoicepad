@@ -4,9 +4,9 @@
 	<li>
 		<a href="/#/customer/<%= model.id %>">
 			<% if (model.logo) { %>
-				<img src="/media/<%= model.logo %>"/>
+				<div style="background-image: url(/media/<%= model.logo %>)"></div>
 			<% } else { %>
-				<img src="/static/img/customer/logo.png"/>
+				<div style="background-image: url(/static/img/customer/logo.png)"></div>
 			<% } %>
 			<h2><%= model.name %></h2>
 		</a>
