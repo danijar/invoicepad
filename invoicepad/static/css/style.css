@@ -3,8 +3,8 @@ body { font-size: 10px; margin: 0; font-family: 'Open Sans', sans-serif; }
 article { position: relative; font-size: 1.5em; }
 
 /* navigation */
-nav { position: relative; width: 100%; background: -webkit-linear-gradient(top, #333, #111); box-shadow: 0 0 1em rgba(0, 0, 0, .6); z-index: 1; }
-nav a { font-size: 1.5em; display: inline-block; padding: 1em; color: #fff; }
+nav { position: relative; width: 100%; background: -webkit-linear-gradient(top, #2a2a2a, #1a1a1a); box-shadow: 0 0 1.2em rgba(0, 0, 0, .5); z-index: 1; }
+nav a { font-size: 1.5em; display: inline-block; padding: .95em 1em 1.05em; color: #fff; }
 nav a:hover { border-bottom: none; }
 
 /* text */
@@ -24,4 +24,4 @@ input[type=submit], input[type=button], a.button { color: #000; text-decoration:
 
 /* style */
 body { background: #132938; }
-.content { width: 30%; margin: 2em auto; padding: 1.5em; background: #eee url(../img/noise.png); border-radius: .5em; box-shadow: 0 0 1em rgba(0, 0, 0, .5), 0 0 100em rgba(117, 177, 206, .5); }
+.content { width: 30%; margin: 3em auto; padding: 1.5em; background: #eee url(../img/noise.png); border-radius: .5em; box-shadow: 0 0 1em rgba(0, 0, 0, .5), 0 0 100em rgba(117, 177, 206, .5); }

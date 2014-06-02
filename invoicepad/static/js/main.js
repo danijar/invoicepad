@@ -20,14 +20,23 @@ requirejs.config({
 });
 
 require(['jquery', 'dashboard/index', 'user/test'], function($, Index, Test) {
-    // Initialize views
-    var index = new Index();
-    var test = new Test();
+    // Initialize routes
+    var routes = {
+        '': new Index(),
+        'test': new Test(),
+    };
 
-    // Register navigation events
-    $('nav a.index').click(function() { index.render(); });
-    $('nav a.test').click(function() { test.render(); });
+    // Listen to route changes
+    $(window).on('hashchange', function() {
+        // Extract route
+        var route = window.location.hash;
+        route = route.substr(2).replace(/\/$/g, '');
+        
+        // Load view
+        if (route in routes)
+            routes[route].render();
+    });
 
-    // Load current view
-    index.render();
+    // Load initial view
+    $(window).trigger('hashchange');
 });
