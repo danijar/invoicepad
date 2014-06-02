@@ -19,7 +19,15 @@ requirejs.config({
     }
 });
 
-require(['user/test'], function (Test) {
-    // Interface to test AJAX calls to backend
-    Test();
+require(['jquery', 'dashboard/index', 'user/test'], function($, Index, Test) {
+    // Initialize views
+    var index = new Index();
+    var test = new Test();
+
+    // Register navigation events
+    $('nav a.index').click(function() { index.render(); });
+    $('nav a.test').click(function() { test.render(); });
+
+    // Load current view
+    index.render();
 });

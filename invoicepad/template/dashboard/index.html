@@ -7,9 +7,11 @@
     <link href="{% static "css/style.css" %} "rel="stylesheet" type="text/css">
 </head>
 <body>
-    <article class="present">
-        <h1>Invoice Pad</h1>
-        <p>You are logged in. After you finished your session, you can <a href="{% url 'logout' %}">log out</a>.</p>
-    </article>
+	<nav>
+		<a href="/#/" class="index">Index</a>
+		<a href="/#/test/" class="test">Test</a>
+		<a href="/logout">Logout</a>
+	</nav>
+	<section class="content"></section>
 </body>
 </html>

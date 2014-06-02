@@ -72,7 +72,7 @@ def show(customer):
 def update(customer, values):
     # filter out values which can be modified
     validated = {}
-    for i in ['name', 'fullnane', 'address1', 'address2', 'address3', 'mail', 'website', 'notes', 'ustid', 'logo']:
+    for i in ['name', 'fullname', 'address1', 'address2', 'address3', 'mail', 'website', 'notes', 'ustid', 'logo']:
         if i in values:
             validated[i] = values[i]
 

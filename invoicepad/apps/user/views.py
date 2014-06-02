@@ -6,9 +6,9 @@ from django.views.decorators.csrf import csrf_exempt
 def index(request):
     # When not logged in show public area
     if request.user.is_anonymous():
-        return render(request, 'user/public.html')
+        return render(request, 'public/index.html')
     # For logged in users show dashboard
-    return render(request, 'user/index.html')
+    return render(request, 'dashboard/index.html')
 
 
 @csrf_exempt

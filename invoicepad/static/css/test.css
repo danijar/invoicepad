@@ -1,6 +1,5 @@
 /* layout */
 .test {  }
-.test:before, .test:after { content: "\00a0"; display: block; overflow: hidden; height: 0; } /* prevent collapsing margins */
 
 /* form */
 .test label { display: inline-block; width: 100%; padding: 0 0 .5em; }
