@@ -1,5 +1,4 @@
 <h1><%= model.name %></h1>
-<p>This is the detail page of a customer.</p>
 <h2>General</h2>
 <label for="name">Name</label>
 <input id="name" type="text" value="<%= model.name %>"/>
@@ -19,6 +18,8 @@
 <h2>Notes</h2>
 <textarea id="notes" rows="7"><%= model.notes %></textarea>
 <h2>Logo</h2>
+<label for="logo">URL to fetch new image</label>
+<input id="logo" type="url" value=""/>
 <div class="transparent">
 <% if (model.logo) { %>
 	<div class="logo" style="background-image: url(<%= model.logo %>)"></div>
@@ -26,6 +27,4 @@
 	<div class="logo"></div>
 <% } %>
 </div><br>
-<p>
-	<a href="" class="button save">Save</a>
-</p>
+<a href="" class="button primary save">Save</a>

@@ -1,4 +1,4 @@
-define(['jquery', 'underscore', 'text!template/console.html', 'css!style/console.css'], function($, _, Template) {
+define(['jquery', 'underscore', 'helper/message', 'text!template/console.html', 'css!style/console.css'], function($, _, Message, Template) {
 
 	// Private members
 	var el;
@@ -20,44 +20,22 @@ define(['jquery', 'underscore', 'text!template/console.html', 'css!style/console
 	}
 
 	function render() {
-		// Set content from template
-		$('.content').html(el);
-		el.html(template({}));
+        // Set content from template
+        $('.content').html(el);
+        el.html(template({}));
 
-		// Fill presets list
-		var select = el.find('#presets');
-		for (var i = 0; i < presets.length; ++i)
-			select.append('<option value="' + i + '">' + presets[i].name + '</option>');
+        // Fill presets list
+        var select = el.find('#presets');
+        for (var i = 0; i < presets.length; ++i)
+            select.append('<option value="' + i + '">' + presets[i].name + '</option>');
 
-		// Select first preset
-		preset();
+        // Select first preset
+        preset();
 
-		// Events
-		el.find('#presets').change(preset);
-		el.find('.send').click(send);
-	}
-
-	function message(text) {
-		// Blend and remove old ones
-		el.find('.message').slideUp(200, function() {
-			$(this).remove();
-		});
-
-		// Wait for remove animation
-		setTimeout(function() {
-			// Add if valid text
-			if (text) {
-				// Create message
-				var message = $('<p class="message">');
-				message.html(text);
-
-				// Blend in
-				message.hide();
-				el.append(message);
-				message.slideDown(200);
-			}
-		}, 100);
-	}
+        // Events
+        el.find('#presets').change(preset);
+        el.find('.send').click(send);
+    }
 
 	function send(e) {
 		// Read inputs
@@ -74,10 +52,13 @@ define(['jquery', 'underscore', 'text!template/console.html', 'css!style/console
 		});
 
 		// Write output
-		deferred.always(function(e) {
+		deferred.done(function(e) {
 			var result = JSON.stringify(e, null, 4);
-			message('<pre>' + result + '</pre>');
-		});
+			Message(el, '<pre>' + result + '</pre>', 'success');
+		}).fail(function(e) {
+            var result = JSON.stringify(e, null, 4);
+            Message(el, '<pre>' + result + '</pre>', 'error');
+        });
 
 		// Don't follow link
 		return false;
