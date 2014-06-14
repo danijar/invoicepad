@@ -4,7 +4,7 @@
 	<input type="text" ng-model="searchText"/>
 	<ul>
 		<li ng-repeat="model in models | orderBy:'name' | filter:searchText" ng-init="">
-			<a ng-switch="Boolean(model.logo)" href="/#/customer/{{ model.id }}/">
+			<a ng-switch="!!model.logo" href="/#/customer/{{ model.id }}/">
 				<div ng-switch-when="true" class="logo" style="background-image: url(/media/{{ model.logo }})"></div>
 				<div ng-switch-default     class="logo" style="background-image: url(/static/img/customer/logo.png)"></div>
 				<h2>{{ model.name }}</h2>
@@ -17,6 +17,6 @@
 	<h2>Add customer</h2>
 	<label for="name">Name</label>
 	<input id="name" type="text" ng-model="name"/>
-	<a ng-click="create()" class="button send">Create</a>
+	<a ng-click="create()" class="button primary">Create</a>
 	<p ng-show="message" class="message">{{ message }}</p>
 </section>

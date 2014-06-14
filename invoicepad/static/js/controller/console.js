@@ -1,6 +1,5 @@
 define(['jquery', 'underscore', 'app', 'css!style/console.css'], function($, _, app) {
 	app.controller('console', function($scope) {
-
 		// Example requests
 		$scope.presets = [
 			{ name: 'Get all customers',        method: 'GET',    url: '/customer/',    content: '' },
@@ -19,9 +18,11 @@ define(['jquery', 'underscore', 'app', 'css!style/console.css'], function($, _, 
 				data:     $scope.content,
 			});
 
-			// Set user message
+			// Show response to user
 			deferred.always(function(e) {
-				$scope.message = JSON.stringify(e, null, 4);
+				$scope.$apply(function() {
+					$scope.message = JSON.stringify(e, null, 4);
+				});
 			});
 		};
 

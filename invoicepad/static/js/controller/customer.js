@@ -1,5 +1,5 @@
 define(['jquery', 'underscore', 'app', 'helper/message', 'css!style/customer.css'], function($, _, app, Message) {
-	app.controller('customer', ['$scope', '$routeParams', function($scope, $routeParams) {
+	app.controller('customer', ['$scope', '$routeParams', '$location', function($scope, $routeParams, $location) {
 
 		// Fetch model id from route
 		var id = $routeParams.id;
@@ -14,41 +14,58 @@ define(['jquery', 'underscore', 'app', 'helper/message', 'css!style/customer.css
 
 			// Inject into scope
 			deferred.done(function(model) {
-				$scope.model = model;
+				$scope.$apply(function() {
+					$scope.model = model;
+				});
 			}).error(function(e) {
-				console.error(e);
-				$scope.message = 'There was an error sending the request.';
+				$scope.$apply(function() {
+					console.error(e);
+					$scope.message = 'There was an error sending the request.';
+				});
 			});
 		}
 
 		$scope.save = function() {
 			// List of field ids
-			var fields = ['name', 'fullname', 'mail', 'website', 'address1', 'address2', 'address3', 'notes', 'logo'];
+			var fields = ['name', 'fullname', 'mail', 'website', 'address1', 'address2', 'address3', 'notes'];
 
 			// Read field values into a map
-			var data = {};
+			var content = {};
 			fields.map(function(field) {
-				var value = el.find('#' + field).val().trim();
+				var value = $scope.model[field].trim();
 				if (value.length)
-					data[field] = value;
+					content[field] = value;
 			});
+
+			// Upload new logo if provided
+			if ($scope.upload)
+				content.logo = $scope.upload.trim();
 
 			// Send to server
 			var deferred = $.ajax({
 				dataType: 'json',
 				method: 'PUT',
 				url: '/customer/' + id + '/',
-				data: JSON.stringify(data),
+				data: JSON.stringify(content),
 			});
 
 			// Sync back validated model
 			deferred.done(function(model) {
-				$scope.model = model;
-				$scope.message = 'All changes saved.';
+				$scope.$apply(function() {
+					$scope.model = model;
+					$scope.message = 'All changes saved.';
+					$location.path('/customer');
+				});
 			}).error(function(e) {
-				console.error(e);
-				$scope.message = 'There was an error sending the request.';
+				$scope.$apply(function() {
+					console.error(e);
+					$scope.message = 'There was an error sending the request.';
+				});
 			});
+		}
+
+		$scope.abort = function() {
+			$location.path('/customer');
 		}
 
 		load();

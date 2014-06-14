@@ -1,6 +1,8 @@
 define(['jquery', 'underscore', 'app', 'css!style/customers.css'], function($, _, app) {
 	app.controller('customers', function($scope) {
 
+		$scope.models = [];
+
 		function load() {
 			// Fetch models from database
 			var deferred = $.ajax({
@@ -11,14 +13,18 @@ define(['jquery', 'underscore', 'app', 'css!style/customers.css'], function($, _
 
 			// Inject into scope
 			deferred.done(function(models) {
-				$scope.models = models;
+				$scope.$apply(function() {
+					$scope.models = models;
+				});
 			}).error(function(e) {
-				console.error(e);
-				$scope.message = 'There was an error sending the request.';
+				$scope.$apply(function() {
+					console.error(e);
+					$scope.message = 'There was an error sending the request.';
+				});
 			});
 		}
 
-		$scope.add = function() {
+		$scope.create = function() {
 			// New customer's properties
 			var content = {
 				name: $scope.name,
@@ -34,11 +40,15 @@ define(['jquery', 'underscore', 'app', 'css!style/customers.css'], function($, _
 
 			// Sync back validated model
 			deferred.done(function(model) {
-				$scope.models.push(model);
-				$scope.message = 'Created new customer. You may want to edit its properties now.';
+				$scope.$apply(function() {
+					$scope.models.push(model);
+					$scope.message = 'Created new customer. You may want to edit its properties now.';
+				});
 			}).error(function(e) {
-				console.error(e);
-				$scope.message = 'There was an error sending the request.';
+				$scope.$apply(function() {
+					console.error(e);
+					$scope.message = 'There was an error sending the request.';
+				});
 			});
 		};
 
