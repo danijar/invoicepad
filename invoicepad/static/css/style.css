@@ -1,12 +1,11 @@
 /* general */
 body { font-size: 10px; margin: 0; padding: 8em 0 0; font-family: 'Open Sans', sans-serif; }
 section { position: relative; }
-article { position: relative; font-size: 1.5em; }
 .center { text-align: center; }
 
 /* style */
 body { background: #173244 url(../img/shine.png) center no-repeat fixed; }
-.content { width: 60%; margin: 3em auto; padding: 1.5em; background: #eee; border-radius: .5em; box-shadow: 0 0 1em rgba(0, 0, 0, .5); z-index: 1; }
+.content { position: relative; display: block; font-size: 1.5em; width: 60%; margin: 3em auto; padding: 1.5em; background: #eee; border-radius: .5em; box-shadow: 0 0 1em rgba(0, 0, 0, .5); z-index: 1; }
 
 /* navigation */
 nav { position: fixed; top: 0; width: 100%; background: -webkit-linear-gradient(top, #F1F1F1, #C9C9C9); box-shadow: 0 0 1.2em rgba(0, 0, 0, .5); z-index: 2; }

@@ -1,10 +1,10 @@
 {% load staticfiles %}
-<html>
+<html ng-app="invoicepad">
 <head>
-    <title>Invoice Pad</title>
-    <script data-main="{% static "js/main" %}" src="{% static "lib/require-2.1.11/require.js" %}"></script>
-    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet" type="text/css">
-    <link href="{% static "css/style.css" %} "rel="stylesheet" type="text/css">
+	<title>Invoice Pad</title>
+	<script data-main="{% static "js/main" %}" src="{% static "lib/require-2.1.11/require.js" %}"></script>
+	<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet" type="text/css">
+	<link href="{% static "css/style.css" %} "rel="stylesheet" type="text/css">
 </head>
 <body>
 	<nav>
@@ -13,6 +13,6 @@
 		<a href="/#/console/">Console</a>
 		<a href="/logout">Logout</a>
 	</nav>
-	<section class="content"></section>
+	<ng-view class="content"></ng-view>
 </body>
 </html>

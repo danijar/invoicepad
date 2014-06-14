@@ -1,30 +1,35 @@
-<h1><%= model.name %></h1>
-<h2>General</h2>
-<label for="name">Name</label>
-<input id="name" type="text" value="<%= model.name %>"/>
-<label for="fullname">Full name</label>
-<input id="fullname" type="text" value="<%= model.fullname %>"/>
-<label for="mail">Email address</label>
-<input id="mail" type="email" value="<%= model.mail %>"/>
-<label for="website">Website</label>
-<input id="website" type="url" value="<%= model.website %>"/>
-<h2>Address</h2>
-<label for="address1">Street and number</label>
-<input id="address1" type="text" value="<%= model.address1 %>"/>
-<label for="address1">Postal code and city</label>
-<input id="address2" type="text" value="<%= model.address2 %>"/>
-<label for="address1">State or nation</label>
-<input id="address3" type="text" value="<%= model.address3 %>"/>
-<h2>Notes</h2>
-<textarea id="notes" rows="7"><%= model.notes %></textarea>
-<h2>Logo</h2>
-<label for="logo">URL to fetch new image</label>
-<input id="logo" type="url" value=""/>
-<div class="transparent">
-<% if (model.logo) { %>
-	<div class="logo" style="background-image: url(<%= model.logo %>)"></div>
-<% } else { %>
-	<div class="logo"></div>
-<% } %>
-</div><br>
-<a href="" class="button primary save">Save</a>
+<section class="customer">
+	<h1>{{ model.name }}</h1>
+
+	<h2>General</h2>
+	<label for="name">Name</label>
+	<input id="name" type="text" value="{{ model.name }}"/>
+	<label for="fullname">Full name</label>
+	<input id="fullname" type="text" value="{{ model.fullname }}"/>
+	<label for="mail">Email address</label>
+	<input id="mail" type="email" value="{{ model.mail }}"/>
+	<label for="website">Website</label>
+	<input id="website" type="url" value="{{ model.website }}"/>
+
+	<h2>Address</h2>
+	<label for="address1">Street and number</label>
+	<input id="address1" type="text" value="{{ model.address1 }}"/>
+	<label for="address1">Postal code and city</label>
+	<input id="address2" type="text" value="{{ model.address2 }}"/>
+	<label for="address1">State or nation</label>
+	<input id="address3" type="text" value="{{ model.address3 }}"/>
+
+	<h2>Notes</h2>
+	<textarea id="notes" rows="7">{{ model.notes }}</textarea>
+
+	<h2>Logo</h2>
+	<label for="logo">URL to fetch new image</label>
+	<input id="logo" type="url" value=""/>
+	<div ng-switch="Boolean(model.logo)" class="transparent">
+		<div ng-switch-when="true" class="logo" style="background-image: url({{ model.logo }})"></div>
+		<div ng-switch-default     class="logo"></div>
+	</div><br>
+
+	<a ng-click="save()" href="" class="button primary save">Save</a>
+	<p ng-show="message" class="message">{{ message }}</p>
+</section>

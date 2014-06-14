@@ -1,18 +1,22 @@
-<h1>Customers</h1>
-<ul>
-<% _.each(models, function(model) { %>
-	<li>
-		<a href="/#/customer/<%= model.id %>/">
-			<% if (model.logo) { %>
-				<div class="logo" style="background-image: url(/media/<%= model.logo %>)"></div>
-			<% } else { %>
-				<div class="logo" style="background-image: url(/static/img/customer/logo.png)"></div>
-			<% } %>
-			<h2><%= model.name %></h2>
-		</a>
-		<% var website = model.website.replace(new RegExp('(^http://www\\.)|(^http://)|(/$)', 'g'), ''); %>
-		<span><a href="<%= model.website %>" target="_blank"><%= website %></a></span>
-		<span><a href="mailto:<%= model.mail %>"><%= model.mail %></a></span>
-	</li>
-<% }); %>
-</ul>
+<section class="customers">
+	<h1>Customers</h1>
+
+	<input type="text" ng-model="searchText"/>
+	<ul>
+		<li ng-repeat="model in models | orderBy:'name' | filter:searchText" ng-init="">
+			<a ng-switch="Boolean(model.logo)" href="/#/customer/{{ model.id }}/">
+				<div ng-switch-when="true" class="logo" style="background-image: url(/media/{{ model.logo }})"></div>
+				<div ng-switch-default     class="logo" style="background-image: url(/static/img/customer/logo.png)"></div>
+				<h2>{{ model.name }}</h2>
+			</a>
+			<span><a href="{{ model.website }}" target="_blank">{{ model.website | domain }}</a></span>
+			<span><a href="mailto:<%= model.mail %>">{{ model.mail }}</a></span>
+		</li>
+	</ul>
+
+	<h2>Add customer</h2>
+	<label for="name">Name</label>
+	<input id="name" type="text" ng-model="name"/>
+	<a ng-click="create()" class="button send">Create</a>
+	<p ng-show="message" class="message">{{ message }}</p>
+</section>
