@@ -5,6 +5,4 @@ define(['app'], function(app) {
 			return input.replace(/(^http:\/\/www\\.)|(^http:\/\/)|(\/$)/g, '');
 		};
 	});
-
-	// ...
 });

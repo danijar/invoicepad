@@ -5,13 +5,13 @@
 		<select id="presets"
 			ng-model="selection"
 			ng-options="preset.name for preset in presets"
-			ng-init="selection=presets[0]"
+			ng-init="selection=presets[0]; select()"
 			ng-change="select()"></select>
 
 		<label for="method"></label>
 		<input ng-model="method" type="text" id="method"/>
 		<label for="url"></label>
-		<input ng-model="url" type="text" id="url" value=""/>
+		<input ng-model="url" type="text" id="url"/>
 		<label for="content"></label>
 		<textarea ng-model="content" id="content" rows="5"></textarea>
 

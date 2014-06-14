@@ -20,20 +20,16 @@ define(['jquery', 'underscore', 'app', 'css!style/console.css'], function($, _, 
 			});
 
 			// Set user message
-			deferred.done(function(e) {
-				var result = JSON.stringify(e, null, 4);
-				$scope.message = '<pre>' + result + '</pre>';
-			}).fail(function(e) {
-	            var result = JSON.stringify(e, null, 4);
-	            $scope.message = '<pre>' + result + '</pre>';
-	        });
-		}
+			deferred.always(function(e) {
+				$scope.message = JSON.stringify(e, null, 4);
+			});
+		};
 
 		$scope.select = function() {
 			// Read preset
 			$scope.method  = $scope.selection.method;
 			$scope.url     = $scope.selection.url;
 			$scope.content = $scope.selection.content;
-		}
+		};
 	});
 });

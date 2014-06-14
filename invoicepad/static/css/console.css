@@ -1,6 +1,1 @@
-/* layout */
-.console {  }
-
-/* monospace font */
-.console input[type=text], .console textarea, .console pre { font-family: monospace; }
-.console pre { margin: -1em 0 0; padding: 1em 0 .5em; overflow: auto; }
+.console textarea { font-family: monospace; }

@@ -1,18 +1,18 @@
 {% load staticfiles %}
-<html ng-app="invoicepad">
+<html>
 <head>
 	<title>Invoice Pad</title>
 	<script data-main="{% static "js/main" %}" src="{% static "lib/require-2.1.11/require.js" %}"></script>
 	<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet" type="text/css">
-	<link href="{% static "css/style.css" %} "rel="stylesheet" type="text/css">
+	<link href="{% static "css/style.css" %}" rel="stylesheet" type="text/css">
 </head>
 <body>
 	<nav>
 		<a href="/#/">Dashboard</a>
-		<a href="/#/customer/">Customers</a>
-		<a href="/#/console/">Console</a>
+		<a href="/#/customer">Customers</a>
+		<a href="/#/console">Console</a>
 		<a href="/logout">Logout</a>
 	</nav>
-	<ng-view class="content"></ng-view>
+	<div ng-view class="content"></div>
 </body>
 </html>
