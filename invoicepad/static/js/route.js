@@ -16,6 +16,4 @@ define(['app', 'controller/dashboard', 'controller/console', 'controller/custome
 			redirectTo: '/'
 		});
 	});
-
-	angular.bootstrap(document, ['invoicepad']);
 });

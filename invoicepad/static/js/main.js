@@ -19,5 +19,5 @@ require.config({
 		'angular-route': { deps: ['angular'] },
 		//'angularAMD': { deps: ['angular'] },
 	},
-	deps: ['route'],
+	deps: ['bootstrap'],
 });
