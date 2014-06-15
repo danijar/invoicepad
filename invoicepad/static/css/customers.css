@@ -1,12 +1,3 @@
-/* table */
-.customers ul { padding: 0; list-style-type: none; }
-.customers li { border: 1px solid #ccc; border-width: 1px 0; margin: 0 0 -1px; white-space: nowrap; transition: background .05s; }
-.customers li:hover { background: rgba(0, 0, 0, .025); }
-.customers li > *, .customers li a > * { display: inline-block; vertical-align: middle; margin-right: .5em; }
-.customers li > a:first-child:hover { border-bottom: none; }
-.customers li .logo { width: 3em; height: 2em; margin-left: .5em; background: center no-repeat; background-size: contain; }
-.customers li h2 { font-size: 1.2em; height: 1.3em; }
-
 /* tools */
 .customers h1 { display: inline-block; }
 .customers .tools > * { display: inline-block; vertical-align: middle; }
@@ -15,3 +6,12 @@
 
 /* message */
 .customers .message { margin-top: 0; }
+
+/* table */
+.customers ul { padding: 0; list-style-type: none; }
+.customers li { border: 1px solid #ccc; border-width: 1px 0; margin: 0 0 -1px; white-space: nowrap; transition: background .05s; }
+.customers li:hover { background: rgba(0, 0, 0, .025); }
+.customers li > *, .customers li a > * { display: inline-block; position: relative; margin-right: .5em; vertical-align: middle; }
+.customers li > a:first-child:hover { border-bottom: none; }
+.customers li .logo { width: 3em; height: 2em; margin-left: .5em; background: center no-repeat; background-size: contain; }
+.customers li h2 { font-size: 1.2em; height: 1.3em; }
