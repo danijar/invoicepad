@@ -9,11 +9,11 @@ define(['app', 'jquery'], function(app, $) {
 				}, function() {
 					$scope.$evalAsync(function() {
 						// Remove forced widths
-						element.children().children().css('width', '');
+						$(element).children().children().css('width', '');
 
 						// Find maximum with of each cell
 						var widths = [];
-						element.children().each(function() {
+						$(element).children().each(function() {
 							// Iterate of each cell in current row
 							$(this).children().each(function(index) {
 								// Guarantee index bounds
@@ -28,7 +28,7 @@ define(['app', 'jquery'], function(app, $) {
 						});
 
 						// Relax table colums
-						element.children().each(function() {
+						$(element).children().each(function() {
 							$(this).children().each(function(index) {
 								// Set cell with to maximum
 								$(this).width(widths[index]);
