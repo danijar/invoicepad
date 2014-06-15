@@ -1,22 +1,26 @@
 <section class="console">
 	<h1>Console</h1>
 	<form>
-		<label for="presets"></label>
-		<select id="presets"
-			ng-model="selection"
-			ng-options="preset.name for preset in presets"
-			ng-init="selection=presets[0]; select()"
-			ng-change="select()"></select>
-
-		<label for="method"></label>
-		<input ng-model="method" type="text" id="method"/>
-		<label for="url"></label>
-		<input ng-model="url" type="text" id="url"/>
-		<label for="content"></label>
-		<textarea ng-model="content" id="content" rows="5"></textarea>
-
-		<a ng-click="send()" class="button send">Send</a>
-
+		<label>
+			Presets
+			<select ng-model="selection"
+				ng-options="preset.name for preset in presets"
+				ng-init="selection=presets[0]; select()"
+				ng-change="select()"></select>
+		</label>
+		<label>
+			Method
+			<input ng-model="method" type="text"/>
+		</label>
+		<label>
+			URL
+			<input ng-model="url" type="text"/>
+		</label>
+		<label>
+			Content
+			<textarea ng-model="content" rows="5"></textarea>
+		</label>
+		<a ng-click="send()" class="button primary">Send</a>
 		<p ng-show="message" class="message">{{ message }}</p>
 </form>
 </section>

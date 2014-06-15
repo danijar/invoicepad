@@ -25,9 +25,15 @@ define(['jquery', 'underscore', 'app', 'css!style/customers.css'], function($, _
 		}
 
 		$scope.create = function() {
+			// Skip if no name specified
+			if (!$scope.search) {
+				$scope.message = 'Please provide a name for the new customer in the search box next to the button.';
+				return;
+			}
+
 			// New customer's properties
 			var content = {
-				name: $scope.name,
+				name: $scope.search,
 			};
 
 			// Request to create new model
@@ -37,6 +43,9 @@ define(['jquery', 'underscore', 'app', 'css!style/customers.css'], function($, _
 				url: '/customer/',
 				data: JSON.stringify(content),
 			});
+
+			// Clear filter text
+			$scope.search = '';
 
 			// Sync back validated model
 			deferred.done(function(model) {
@@ -58,7 +67,7 @@ define(['jquery', 'underscore', 'app', 'css!style/customers.css'], function($, _
 		function relax() {
 			// Find maximum with of each cell
 			var widths = [];
-			el.find('ul').children().each(function() {
+			$('.customers ul').children().each(function() {
 				// Iterate of each cell in current row
 				$(this).children().each(function(index) {
 					// Guarantee index bounds
@@ -70,10 +79,13 @@ define(['jquery', 'underscore', 'app', 'css!style/customers.css'], function($, _
 					if (widths[index] < width)
 						widths[index] = width;
 				});
+				console.log(widths);
 			});
 
+			console.log(widths);
+
 			// Relax table colums
-			el.find('ul').children().each(function() {
+			$('.customers ul').children().each(function() {
 				$(this).children().each(function(index) {
 					// Set cell with to maximum
 					$(this).width(widths[index]);

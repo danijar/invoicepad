@@ -41,7 +41,7 @@ define(['jquery', 'underscore', 'app', 'helper/message', 'css!style/customer.css
 			if ($scope.upload)
 				content.logo = $scope.upload.trim();
 
-			// Send to server
+			// Send request to server
 			var deferred = $.ajax({
 				dataType: 'json',
 				method: 'PUT',
@@ -63,6 +63,30 @@ define(['jquery', 'underscore', 'app', 'helper/message', 'css!style/customer.css
 				});
 			});
 		}
+
+		$scope.delete = function() {
+			// Ask user to confirm
+			if (confirm("Please confirm to delete customer '" + $scope.model.name + "' permanently.")) {
+				// Send request to server
+				var deferred = $.ajax({
+					method: 'DELETE',
+					url: '/customer/' + id + '/',
+				});
+
+				// Sync back validated model
+				deferred.done(function() {
+					$scope.$apply(function() {
+						$scope.message = 'This customer was deleted.';
+						$location.path('/customer');
+					});
+				}).error(function(e) {
+					$scope.$apply(function() {
+						console.error(e);
+						$scope.message = 'There was an error sending the request.';
+					});
+				});
+			}
+		};
 
 		$scope.abort = function() {
 			$location.path('/customer');

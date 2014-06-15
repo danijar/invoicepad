@@ -2,35 +2,51 @@
 	<h1>{{ model.name }}</h1>
 
 	<h2>General</h2>
-	<label for="name">Name</label>
-	<input ng-model="model.name" id="name" type="text"/>
-	<label for="fullname">Full name</label>
-	<input ng-model="model.fullname" id="fullname" type="text"/>
-	<label for="mail">Email address</label>
-	<input ng-model="model.mail" id="mail" type="email"/>
-	<label for="website">Website</label>
-	<input ng-model="model.website" id="website" type="url"/>
+	<label>
+		Name
+		<input ng-model="model.name" type="text"/>
+	</label>
+	<label>
+		Full name
+		<input ng-model="model.fullname" type="text"/>
+	</label>
+	<label>
+		Email address
+		<input ng-model="model.mail" type="email"/>
+	</label>
+	<label>
+		Website
+		<input ng-model="model.website" type="url"/>
+	</label>
 
 	<h2>Address</h2>
-	<label for="address1">Street and number</label>
-	<input ng-model="model.address1" id="address1" type="text"/>
-	<label for="address1">Postal code and city</label>
-	<input ng-model="model.address2" id="address2" type="text"/>
-	<label for="address1">State or nation</label>
-	<input ng-model="model.address3" id="address3" type="text"/>
+	<label>
+		Street and number
+		<input ng-model="model.address1" type="text"/>
+	</label>
+	<label>
+		Postal code and city
+		<input ng-model="model.address2" type="text"/>
+	</label>
+	<label>
+		State or nation
+		<input ng-model="model.address3" type="text"/>
+	</label>
 
 	<h2>Notes</h2>
-	<textarea ng-model="model.notes" id="notes" rows="7"></textarea>
+	<textarea ng-model="model.notes" rows="7"></textarea>
 
 	<h2>Logo</h2>
-	<label for="logo">URL to fetch new image</label>
-	<input ng-model="upload" id="logo" type="url" value=""/>
-	<div ng-switch="!!model.logo" class="transparent">
-		<div ng-switch-when="true" class="logo" style="background-image: url({{ model.logo }})"></div>
-		<div ng-switch-default     class="logo"></div>
+	<label>
+		URL to fetch new image
+		<input ng-model="upload" type="url" value=""/>
+	</label>
+	<div ng-show="model.logo" class="transparent">
+		<img src="{{ model.logo }}"></div>
 	</div><br>
 
 	<a ng-click="save()" class="button primary">Save</a>
+	<a ng-click="delete()" class="button">Delete</a>
 	<a ng-click="abort()" class="button">Abort</a>
 	<p ng-show="message" class="message">{{ message }}</p>
 </section>
