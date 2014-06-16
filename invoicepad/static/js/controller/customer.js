@@ -117,6 +117,10 @@ define(['jquery', 'underscore', 'app', 'helper/message', 'css!style/customer.css
 			$scope.model.address2 = postal() + ' ' + _.sample(words, pick(2)).join(' ');
 			$scope.model.address3 = _.sample(words, 2).join(' ');
 			$scope.model.notes = text();
+
+			// Logo from Stackexchange sites
+			var sites = 'stackoverflow serverfault superuser stackexchangemeta webapps webmasters math gamedev diy photo stats gis stackapps gaming unix tex english rpg programmers electronics cstheory sharepoint drupal mathematica workplace patents'.split(' ');
+			$scope.upload = 'http://cdn.sstatic.net/' + _.sample(sites) + '/img/apple-touch-icon.png';
 		};
 
 		load();
