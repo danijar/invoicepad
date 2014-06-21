@@ -16,6 +16,9 @@ define(['jquery', 'underscore', 'app', 'helper/message', 'css!style/customer.css
 			deferred.done(function(model) {
 				$scope.$apply(function() {
 					$scope.model = model;
+
+					// Keep copy to compare changes
+					$scope.initial = $.extend({}, model);
 				});
 			}).error(function(e) {
 				$scope.$apply(function() {
@@ -32,14 +35,26 @@ define(['jquery', 'underscore', 'app', 'helper/message', 'css!style/customer.css
 			// Read field values into a map
 			var content = {};
 			fields.map(function(field) {
-				var value = $scope.model[field].trim();
-				if (value.length)
-					content[field] = value;
+				if (field in $scope.model) {
+					// Filter changes
+					var value = $scope.model[field].trim();
+					var changed = true;
+					if (field in $scope.initial)
+						changed = (value != $scope.initial[field]);
+					if (changed)
+						content[field] = value;
+				}
 			});
 
 			// Upload new logo if provided
 			if ($scope.upload)
 				content.logo = $scope.upload.trim();
+
+			// Skip if no changes were made
+			if (!Object.keys(content).length) {
+				$scope.message = 'You did not make any changes.';
+				return;
+			}
 
 			// Send request to server
 			var deferred = $.ajax({

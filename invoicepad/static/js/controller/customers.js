@@ -1,5 +1,5 @@
 define(['jquery', 'underscore', 'app', 'css!style/customers.css'], function($, _, app) {
-	app.controller('customers', function($scope) {
+	app.controller('customers', ['$scope', '$routeParams', '$location', function($scope, $routeParams, $location) {
 
 		$scope.models = [];
 
@@ -25,15 +25,9 @@ define(['jquery', 'underscore', 'app', 'css!style/customers.css'], function($, _
 		}
 
 		$scope.create = function() {
-			// Skip if no name specified
-			if (!$scope.search) {
-				$scope.message = 'Please provide a name for the new customer in the search box next to the button.';
-				return;
-			}
-
 			// New customer's properties
 			var content = {
-				name: $scope.search,
+				name: $scope.search || '',
 			};
 
 			// Request to create new model
@@ -44,14 +38,13 @@ define(['jquery', 'underscore', 'app', 'css!style/customers.css'], function($, _
 				data: JSON.stringify(content),
 			});
 
-			// Clear filter text
-			$scope.search = '';
-
 			// Sync back validated model
 			deferred.done(function(model) {
 				$scope.$apply(function() {
 					$scope.models.push(model);
-					$scope.message = 'Created new customer. You may want to edit its properties now.';
+
+					// Head over to form
+					$location.path('/customer/' + model.id);
 				});
 			}).error(function(e) {
 				$scope.$apply(function() {
@@ -62,5 +55,5 @@ define(['jquery', 'underscore', 'app', 'css!style/customers.css'], function($, _
 		};
 
 		load();
-	});
+	}]);
 });
