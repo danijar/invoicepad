@@ -1,6 +1,6 @@
 define(['app', 'jquery'], function(app, $) {
 	app.directive('arrow', function($parse) {
-
+		// Set focus to first element matching given selector
 		function follow(selector) {
 			// Select from DOM
 			var target = $(selector).first();
@@ -19,28 +19,32 @@ define(['app', 'jquery'], function(app, $) {
 			}
 		}
 
+		// Execute once per usage
+		function link($scope, $element, $attrs) {
+			var targets = $parse($attrs.arrow)($scope);
+			$element.on('keydown', function(e) {
+				// Arrow left
+				if (e.which == 37 && targets.left)
+					return follow(targets.left);
+
+				// Arrow up
+				if (e.which == 38 && targets.up)
+					return follow(targets.up);
+
+				// Arrow right
+				if (e.which == 39 && targets.right)
+					return follow(targets.right);
+
+				// Arrow down
+				if (e.which == 40 && targets.down)
+					return follow(targets.down);
+			});
+		};
+
+		// Return directive
 		return {
 			restrict: 'A',
-			link: function($scope, $element, $attrs) {
-				var targets = $parse($attrs.arrow)($scope);
-				$element.on('keydown', function(e) {
-					// Arrow left
-					if (e.which == 37 && targets.left)
-						return follow(targets.left);
-
-					// Arrow up
-					if (e.which == 38 && targets.up)
-						return follow(targets.up);
-
-					// Arrow right
-					if (e.which == 39 && targets.right)
-						return follow(targets.right);
-
-					// Arrow down
-					if (e.which == 40 && targets.down)
-						return follow(targets.down);
-				});
-			},
+			link: link
 		};
 	});
 });
