@@ -1,8 +1,8 @@
 <section class="customers">
 	<h1>Customers</h1>
 	<div class="tools right">
-		<input ng-model="search" type="text" class="search" arrow="{down: 'ul'}" autofocus/>
-		<a ng-click="create()" class="button" tabindex="0">Create</a>
+		<input ng-model="search" type="text" class="search" arrow="{down: 'ul', right: '.button'}" autofocus/>
+		<a ng-click="create()" class="button" arrow="{down: 'ul', left: 'input'}" tabindex="0">Create</a>
 	</div>
 
 	<p ng-show="message" class="message">{{ message }}</p>

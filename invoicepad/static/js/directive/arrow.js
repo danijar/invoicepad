@@ -24,12 +24,20 @@ define(['app', 'jquery'], function(app, $) {
 			link: function($scope, $element, $attrs) {
 				var targets = $parse($attrs.arrow)($scope);
 				$element.on('keydown', function(e) {
+					// Arrow left
+					if (e.which == 37 && targets.left)
+						return follow(targets.left);
+
 					// Arrow up
-					if (targets.up && e.which == 38)
+					if (e.which == 38 && targets.up)
 						return follow(targets.up);
 
+					// Arrow right
+					if (e.which == 39 && targets.right)
+						return follow(targets.right);
+
 					// Arrow down
-					if (targets.down && e.which == 40)
+					if (e.which == 40 && targets.down)
 						return follow(targets.down);
 				});
 			},

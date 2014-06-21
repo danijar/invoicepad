@@ -22,24 +22,24 @@ define(['app', 'jquery'], function(app, $) {
 		}
 
 		// Execute once per usage
-		function link(scope, element) {
+		function link(scope, $element) {
 			// Make element focusable
-			if (!element.attr('tabindex'))
-				element.attr('tabindex', 0);
+			if (!$element.attr('tabindex'))
+				$element.attr('tabindex', 0);
 
-			element.on('focus', function() {
+			$element.on('focus', function() {
 				// Step in at first element
-				focus(element.children().first());
+				focus($element.children().first());
 			});
 
-			element.on('focusout', function() {
+			$element.on('focusout', function() {
 				// Clear selection
 				$(this).children().removeClass('selected');
 			});
 
-			element.on('keydown', 'li', function(e) {
+			$element.on('keydown', 'li', function(e) {
 				// Items to select
-				var items = element.children();
+				var items = $element.children();
 				var current = items.filter('.selected');
 
 				// Step in at first element
@@ -53,11 +53,16 @@ define(['app', 'jquery'], function(app, $) {
 				// Arrow up
 				if (e.which == 38)
 					return focus(current.prev());
+
+				// Follow link on enter
+				if (e.which == 13)
+					current.find('a').first().click();
 			});
 
-			element.on('mouseenter', 'li', function() {
+			$element.on('mouseenter', 'li', function() {
 				// Focus item pointed on
-				return focus($(this));
+				if ($element.find(':focus').length)
+					return focus($(this));
 			});
 		}
 
