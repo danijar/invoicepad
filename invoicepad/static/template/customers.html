@@ -1,13 +1,13 @@
 <section class="customers">
 	<h1>Customers</h1>
 	<div class="tools right">
-		<input  ng-model="search" type="text" class="search" autofocus/>
-		<a ng-click="create()" ng-class="{disabled: !search}" class="button" href="">Create</a>
+		<input ng-model="search" type="text" class="search" arrow="{down: 'ul'}" autofocus/>
+		<a ng-click="create()" ng-class="{disabled: !search}" class="button" tabindex="0">Create</a>
 	</div>
 
 	<p ng-show="message" class="message">{{ message }}</p>
 
-	<ul relax arrows>
+	<ul arrow="{up: 'input'}" relax arrows>
 		<li ng-repeat="model in models | orderBy:'name' | filter:search">
 			<a ng-switch="!!model.logo" href="/#/customer/{{ model.id }}/">
 				<div ng-switch-when="true" class="logo" style="background-image: url(/media/{{ model.logo }})"></div>

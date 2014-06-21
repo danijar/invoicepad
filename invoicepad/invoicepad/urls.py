@@ -3,6 +3,9 @@ from django.conf.urls import patterns, include, url
 from django.conf.urls.static import static
 from django.contrib import admin
 
+from django.contrib.staticfiles.views import serve
+from django.views.decorators.cache import never_cache
+
 
 urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
@@ -10,4 +13,11 @@ urlpatterns = patterns('',
     url(r'^login/$', 'apps.user.views.login', name='login'),
     url(r'^logout/$', 'apps.user.views.logout', name='logout'),
     url(r'^customer/((?P<id>[0-9]+)/)?', 'apps.customer.views.customer', name='customer'),
-) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+)
+
+# Serve all media files publically
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+# Skip cache for development
+if settings.DEBUG:
+	urlpatterns += patterns('', url(r'^static/(?P<path>.*)$', never_cache(serve)))
