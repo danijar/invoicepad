@@ -62,36 +62,5 @@ define(['jquery', 'underscore', 'app', 'css!style/customers.css'], function($, _
 		};
 
 		load();
-
-		/*
-		function relax() {
-			// Find maximum with of each cell
-			var widths = [];
-			$('.customers ul').children().each(function() {
-				// Iterate of each cell in current row
-				$(this).children().each(function(index) {
-					// Guarantee index bounds
-					while (index > widths.length - 1)
-						widths.push(0);
-
-					// Update width if larger
-					var width = $(this).width();
-					if (widths[index] < width)
-						widths[index] = width;
-				});
-				console.log(widths);
-			});
-
-			console.log(widths);
-
-			// Relax table colums
-			$('.customers ul').children().each(function() {
-				$(this).children().each(function(index) {
-					// Set cell with to maximum
-					$(this).width(widths[index]);
-				});
-			});
-		}
-		*/
 	});
 });

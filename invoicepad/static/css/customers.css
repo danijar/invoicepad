@@ -10,7 +10,7 @@
 /* table */
 .customers ul { padding: 0; list-style-type: none; }
 .customers li { border: 1px solid #ccc; border-width: 1px 0; margin: 0 0 -1px; white-space: nowrap; transition: background .05s; }
-.customers li:hover { background: rgba(0, 0, 0, .025); }
+.customers li:hover, .customers li.selected { background: rgba(0, 0, 0, .025); }
 .customers li > *, .customers li a > * { display: inline-block; position: relative; margin-right: .5em; vertical-align: middle; }
 .customers li > * { margin-right: 1em; }
 .customers li > a:first-child:hover { border-bottom: none; }
