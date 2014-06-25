@@ -28,12 +28,12 @@ define(['jquery', 'underscore', 'app', 'helper/message', 'css!style/customer.css
 			});
 		}
 
-		$scope.save = function() {
+		function changes() {
 			// List of field ids
 			var fields = ['name', 'fullname', 'mail', 'website', 'address1', 'address2', 'address3', 'notes'];
 
 			// Read field values into a map
-			var content = {};
+			var values = {};
 			fields.map(function(field) {
 				if (field in $scope.model) {
 					// Filter changes
@@ -42,13 +42,20 @@ define(['jquery', 'underscore', 'app', 'helper/message', 'css!style/customer.css
 					if (field in $scope.initial)
 						changed = (value != $scope.initial[field]);
 					if (changed)
-						content[field] = value;
+						values[field] = value;
 				}
 			});
 
 			// Upload new logo if provided
 			if ($scope.upload)
-				content.logo = $scope.upload.trim();
+				values.logo = $scope.upload.trim();
+
+			return values;
+		}
+
+		$scope.save = function() {
+			// Get changes
+			var content = changes();
 
 			// Skip if no changes were made
 			if (!Object.keys(content).length) {
@@ -105,8 +112,11 @@ define(['jquery', 'underscore', 'app', 'helper/message', 'css!style/customer.css
 		};
 
 		$scope.abort = function() {
-			// Ask user to confirm
-			if (confirm("Unsaved changes will be discarded."))
+			// Find out if changes were made
+			var changed = Object.keys(changes()).length ? true : false;
+
+			// Ask user to confirm if there are changes
+			if (!changed || confirm('Unsaved changes will be discarded.'))
 				$location.path('/customer');
 		}
 
