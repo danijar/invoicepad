@@ -1,4 +1,7 @@
+import json
+
 from django.shortcuts import render, redirect
+from django.http import HttpResponse, HttpResponseBadRequest
 from django.contrib import auth
 from django.views.decorators.csrf import csrf_exempt
 
@@ -45,3 +48,22 @@ def logout(request):
     # Log out and redirect to public area
     auth.logout(request)
     return redirect('index')
+
+def user(request):
+    if request.user.is_anonymous():
+        return HttpResponse('Unauthorized', status=401)
+
+    if request.method == 'GET':
+        # Return details of logged in user
+        user = request.user
+        values = {
+            'first_name': user.first_name,
+            'last_name':  user.last_name,
+            'email':      user.email,
+            'last_login': str(user.last_login),
+        }
+        string = json.dumps(values)
+        return HttpResponse(string, content_type='application/json')
+    else:
+        # No method available
+        return HttpResponseBadRequest()
