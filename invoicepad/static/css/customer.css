@@ -3,4 +3,8 @@
 .customer .transparent img { display: block; height: 10em; }
 
 /* buttons */
-.actions { background: #444; margin: 1em -1.5em -1.5em; padding: 1em 1.5em 1.5em; }
+.customer .actions { background: #444; margin: 1em -1.5em -1.5em; padding: 1em 1.5em 1.5em; }
+.customer .actions .button { vertical-align: top; }
+
+/* message */
+.customer .message { margin: 1.5em -1.5em -1.5em; }

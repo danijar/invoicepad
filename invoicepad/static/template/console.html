@@ -1,4 +1,4 @@
-<section class="console">
+<section class="console" arrows="{on: 'input, select', down: 'parent nextAll find input first', up: 'parent prevAll find input, select last', mouse: false}">
 	<h1>Console</h1>
 	<form>
 		<label>
@@ -6,7 +6,7 @@
 			<select ng-model="selection"
 				ng-options="preset.name for preset in presets"
 				ng-init="selection=presets[0]; select()"
-				ng-change="select()"></select>
+				ng-change="select()" autofocus></select>
 		</label>
 		<label>
 			Method
@@ -20,7 +20,7 @@
 			Content
 			<textarea ng-model="content" rows="5"></textarea>
 		</label>
-		<a ng-click="send()" class="button primary">Send</a>
+		<a ng-click="send()" class="button primary" tabindex="0">Send</a>
 		<p ng-show="message" class="message">{{ message }}</p>
 </form>
 </section>

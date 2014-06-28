@@ -1,1 +1,2 @@
 .console textarea { font-family: monospace; }
+.console .message { margin: 1em -1.5em -1.5em; font-family: monospace; white-space: pre; }

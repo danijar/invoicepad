@@ -1,5 +1,53 @@
-<section class="dashboard">
+<section class="dashboard clearfix">
 	<h1>Dashboard</h1>
+	<p>Hi there<span ng-if="user.first_name">, {{ user.first_name }}</span><span ng-if="user.last_name"> {{ user.last_name }}</span>! You are logged in. Use the navigation above. If other people can use this computer, make sure to <a href="/logout">log out</a> afterwards.</p>
+	<br>
+	<br>
 	<p ng-show="message" class="message">{{ message }}</p>
-	<p>Hi there, {{ model.first_name }} {{ model.last_name }}! You are logged in. Use the navigation above.</p>
+	<div class="third">
+		<div class="clearfix">
+			<a class="headline" href="/#/customer">
+				<h2><span class="count">{{ customers.length }}</span> Customers</h2>
+			</a>
+			<a class="button">Create</a>
+		</div>
+		<ul class="table" arrows="{on: 'li', up: 'prev', down: 'next', mouse: true}" relax>
+			<li ng-repeat="model in customers | limitTo:5">
+				<a ng-switch="!!model.logo" href="/#/customer/{{ model.id }}">
+					<div ng-switch-when="true" class="logo" style="background-image: url(/media/{{ model.logo }})"></div>
+					<div ng-switch-default     class="logo" style="background-image: url(/static/img/customer/logo.png)"></div>
+					<h3>{{ model.name }}</h3>
+				</a>
+			</li>
+			<li ng-hide="customers.length" class="disabled center"><h3>No customers yet.</h3></li>
+		</ul>
+	</div>
+	<div class="third">
+		<div class="clearfix">
+			<a class="headline" href="/#/project">
+				<h2><span class="count">{{ projects.length }}</span> Projects</h2>
+			</a>
+			<a class="button">Create</a>
+		</div>
+		<ul class="table" arrows="{on: 'li', up: 'prev', down: 'next', mouse: true}" relax>
+			<li ng-repeat="model in projects | limitTo:5">
+				<a href="/#/project/{{ model.id }}"><h3>{{ model.name }}</h3></a>
+			</li>
+			<li ng-hide="projects.length" class="disabled center"><h3>No projects yet.</h3></li>
+		</ul>
+	</div>
+	<div class="third">
+		<div class="clearfix">
+			<a class="headline" href="/#/invoice">
+				<h2><span class="count">{{ invoices.length }}</span> Invoices</h2>
+			</a>
+			<a class="button">Create</a>
+		</div>
+		<ul class="table" arrows="{on: 'li', up: 'prev', down: 'next', mouse: true}" relax>
+			<li ng-repeat="model in invoices | limitTo:5">
+				<a href="/#/invoice/{{ model.id }}"><h3>{{ model.name }}</h3></a>
+			</li>
+			<li ng-hide="invoices.length" class="disabled center"><h3>No invoices yet.</h3></li>
+		</ul>
+	</div>
 </section>

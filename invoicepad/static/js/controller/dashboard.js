@@ -1,17 +1,17 @@
-define(['app'], function(app) {
+define(['app', 'css!style/dashboard.css'], function(app) {
 	app.controller('dashboard', function($scope) {
-		function load() {
+		function load(url, model) {
 			// Fetch model from server
 			var deferred = $.ajax({
 				dataType: 'json',
 				method: 'GET',
-				url: '/user/',
+				url: url,
 			});
 
 			// Inject into scope
-			deferred.done(function(model) {
+			deferred.done(function(content) {
 				$scope.$apply(function() {
-					$scope.model = model;
+					$scope[model] = content;
 				});
 			}).error(function(e) {
 				$scope.$apply(function() {
@@ -21,6 +21,9 @@ define(['app'], function(app) {
 			});
 		}
 
-		load();
+		load('/user/', 'user');
+		load('/customer/', 'customers');
+		$scope.projects = [];
+		$scope.invoices = [];
 	});
 });

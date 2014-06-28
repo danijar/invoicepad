@@ -1,0 +1,9 @@
+/* containers */
+.dashboard .third + .third { padding-left: 1em; }
+
+/* headlines */
+.dashboard .headline { cursor: pointer; }
+.dashboard .headline:hover { border-bottom: none; }
+.dashboard .count { color: #aaa; }
+.dashboard h2 { display: inline-block; margin: 0; }
+.dashboard .button { display: inline-block; float: right; margin-right: 0; }
