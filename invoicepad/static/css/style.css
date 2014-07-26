@@ -9,8 +9,8 @@ section { position: relative; }
 .third + .third { margin-left: 1.5em; }
 
 /* style */
-body { background: #edeff0 fixed center; /* background-image: url(../img/bg.jpg); */ background-size: cover; }
-.content { position: relative; display: block; font-size: 1.5em; width: 60%; margin: 3em auto; padding: 1.5em; background: #fff; box-shadow: 0 .05em .5em .15em rgba(0, 0, 0, .1); z-index: 1; }
+body { background: #edeff0 url(../img/bg.jpg) fixed center; background-size: cover; }
+.content { position: relative; display: block; font-size: 1.5em; width: 80%; margin: 3em auto; padding: 1.5em; background: #fff; box-shadow: 0 .05em .5em .15em rgba(0, 0, 0, .1); z-index: 1; }
 .content { min-height: 50%; }
 
 /* navigation */

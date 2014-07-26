@@ -16,7 +16,7 @@ define(['jquery', 'underscore', 'app', 'helper/message', 'css!style/customer.css
 			deferred.done(function(model) {
 				$scope.$apply(function() {
 					$scope.model = model;
-
+					
 					// Keep copy to compare changes
 					$scope.initial = $.extend({}, model);
 				});

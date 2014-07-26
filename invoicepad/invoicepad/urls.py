@@ -13,7 +13,7 @@ urlpatterns = patterns('',
     url(r'^login/$', 'apps.user.views.login', name='login'),
     url(r'^logout/$', 'apps.user.views.logout', name='logout'),
     url(r'^user/$', 'apps.user.views.user', name='user'),
-    url(r'^customer/((?P<id>[0-9]+)/)?', 'apps.customer.views.customer', name='customer'),
+    url(r'^customer/((?P<id>[0-9]+)/)?$', 'apps.customer.views.customer', name='customer'),
 )
 
 # Serve all media files publically

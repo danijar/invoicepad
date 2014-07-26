@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+from apps.customer.fields import UrlImageField
+
 
 class Customer(models.Model):
     user     = models.ForeignKey(User)
@@ -13,7 +15,7 @@ class Customer(models.Model):
     address3 = models.CharField(max_length=63, blank=True)
     ustid    = models.CharField(max_length=15, blank=True)
     notes    = models.TextField(blank=True)
-    logo     = models.ImageField(upload_to='customer/logo', null=True, blank=True)
+    logo     = UrlImageField(upload_to='customer/logo', null=True, blank=True)
 
     def __str__(self):
         return self.name

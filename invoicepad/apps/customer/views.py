@@ -10,6 +10,17 @@ from django.contrib.auth.models import User
 from django.forms.models import model_to_dict
 
 from apps.customer.models import Customer
+from django.db.models.fields.files import ImageFieldFile
+
+
+class MyJSONEncoder(json.JSONEncoder):
+    def default(self, obj):
+        if isinstance(obj, ImageFieldFile):
+            if obj:
+                return obj.url
+            else:
+                return ''
+        return json.JSONEncoder.default(self, obj)
 
 
 @csrf_exempt
@@ -18,12 +29,9 @@ def customer(request, id):
         return HttpResponse('Unauthorized', status=401)
 
     # Ensure integer type
-    hasid = False
-    if id is not None:
-        hasid = True
-        id = int(id)
+    id = int(id) if id else None
 
-    if request.method == 'GET' and hasid:
+    if request.method == 'GET' and id:
         # Get single model
         model = get_object_or_404(Customer, id=id, user=request.user)
         return show(model)
@@ -36,18 +44,16 @@ def customer(request, id):
     elif request.method == 'POST':
         # Create new model
         values = json.loads(request.body.decode('utf-8'))
-        if not 'name' in values:
-            return HttpResponseBadRequest()
-        model = Customer.objects.create(name=values['name'], user=request.user)
+        model = Customer.objects.create(name='', user=request.user)
         update(model, values)
         return show(model)
-    elif request.method == 'PUT' and hasid:
+    elif request.method == 'PUT' and id:
         # Update existing models
         model = get_object_or_404(Customer, id=id, user=request.user)
         values = json.loads(request.body.decode('utf-8'))
         update(model, values)
         return show(model)
-    elif request.method == 'DELETE' and hasid:
+    elif request.method == 'DELETE' and id:
         # Delete model
         model = get_object_or_404(Customer, id=id, user=request.user)
         model.delete()
@@ -58,30 +64,20 @@ def customer(request, id):
 
 
 def show(customer):
-    # get properties
+    # Respond with serialized model
     values = model_to_dict(customer)
-
-    # replace logo object by url
-    values['logo'] = values['logo'].url if values['logo'] else ''
-
-    # respond
-    string = json.dumps(values)
+    string = json.dumps(values, cls=MyJSONEncoder)
     return HttpResponse(string, content_type='application/json')
 
 
 def update(customer, values):
-    # filter out values which can be modified
+    # Filter allowed values
     validated = {}
     for i in ['name', 'fullname', 'address1', 'address2', 'address3', 'mail', 'website', 'notes', 'ustid', 'logo']:
         if i in values:
             validated[i] = values[i]
 
-    # fetch logo from url
-    if 'logo' in validated and validated['logo']:
-        filename = str(uuid.uuid4()) + '.png'
-        validated['logo'] = ContentFile(urllib.request.urlopen(validated['logo']).read(), filename)
-
-    # update model
+    # Update model
     for (key, value) in validated.items():
         setattr(customer, key, value)
     customer.save()
