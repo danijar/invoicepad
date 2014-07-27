@@ -16,10 +16,7 @@ from django.db.models.fields.files import ImageFieldFile
 class MyJSONEncoder(json.JSONEncoder):
     def default(self, obj):
         if isinstance(obj, ImageFieldFile):
-            if obj:
-                return obj.url
-            else:
-                return ''
+            return obj.url if obj else ''
         return json.JSONEncoder.default(self, obj)
 
 

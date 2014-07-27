@@ -11,18 +11,30 @@ class UrlImageFileDescriptor(ImageFileDescriptor):
 		# If a string is used for assignment, it is used as URL
 		# to fetch an image from and store it on the server.
 		if isinstance(value, str):
-			try:
-				response = urllib.request.urlopen(value)
-				image = response.read()
-				name = str(uuid.uuid4()) + '.png'
-				value = ContentFile(image, name)
-			except:
-				print('Error fetching image from', value)
-				pass
+			# Make sure it's an URL, since Django internally assigns the
+			# local paths when instantiating models with file fields.
+			PROTOCOLS = ['http', 'https', 'ftp']
+			if value.startswith(tuple(x + '://' for x in PROTOCOLS)):
+				try:
+					# Fetch image
+					response = urllib.request.urlopen(value)
+					image = response.read()
+					# Find file format
+					headers = response.info()
+					if 'Content-Type' in headers:
+						format = headers['Content-Type'].split('/')[1].strip()
+					elif '.' in value:
+						format = value.split('.')[-1]
+					else:
+						format = 'png'
+					# Create file from random name
+					name = str(uuid.uuid4()) + '.' + format
+					value = ContentFile(image, name)
+				except:
+					print('Error fetching', value)
+					pass
 		super().__set__(instance, value)
 
 
 class UrlImageField(models.ImageField):
-	# An image field that you can assign a string to and it will
-	# automatically fetch the image from that URL.
 	descriptor_class = UrlImageFileDescriptor
