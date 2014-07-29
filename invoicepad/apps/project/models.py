@@ -11,7 +11,7 @@ class Project(models.Model):
 	name        = models.CharField(max_length=127)
 	description = models.TextField()
 	deadline    = models.DateField(null=True)
-	agreement   = models.DateField(null=True, default=now)
+	agreement   = models.DateField(null=True, default=lambda: now().date())
 	finished    = models.DateField(null=True)
 	value       = models.IntegerField(null=True)
 	hours       = models.PositiveIntegerField(default=0)

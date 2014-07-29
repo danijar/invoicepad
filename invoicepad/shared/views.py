@@ -5,14 +5,25 @@ from django.http import HttpResponse, HttpResponseBadRequest, Http404
 from django.forms.models import model_to_dict
 
 
-class provide(object):
-	def __init__(self, model, allowed, summary=None, encoder=None):
+class Encoder(json.JSONEncoder):
+	def __init__(self, treats={}):
+		self.treats = treats
+		super().__init__()
+
+	def default(self, obj):
+		if type(obj) in self.treats:
+			return self.treats[type(obj)](obj)
+		return json.JSONEncoder.default(self, obj)
+
+
+class Ressource(object):
+	def __init__(self, model, allowed, summary=None, treats={}):
 		self.model = model
 		self.allowed = allowed
 		self.summary = summary
-		self.encoder = encoder
+		self.encoder = Encoder(treats)
 
-		# Use all for summary if not provided
+		# Fall back to allowed and id for summary
 		if summary:
 			self.summary = summary
 		else:
@@ -37,9 +48,8 @@ class provide(object):
 			return self.show(entities)
 		elif request.method == 'POST':
 			# Create new entity
-			entity = self.model.objects.create(user=request.user)
 			values = self.parse(request)
-			self.update(entity, values)
+			entity = self.create(request.user, values)
 			return self.show(entity)
 		elif request.method == 'PUT' and id:
 			# Update existing models
@@ -56,9 +66,16 @@ class provide(object):
 			# No method available
 			return HttpResponseBadRequest()
 
+	# Get dict from serialized request body
 	def parse(self, request):
 		values = json.loads(request.body.decode('utf-8'))
 		return values
+
+	# Create new entity from model
+	def create(self, user, values):
+		entity = self.model.objects.create(user=user)
+		self.update(entity, values)
+		return entity
 
 	# Get entity by id or list of all entities
 	def get(self, user, id=None):
@@ -76,7 +93,7 @@ class provide(object):
 			del values['user']
 		else:
 			values = list(entity.values(*self.summary))
-		string = json.dumps(values, cls=self.encoder) if self.encoder else json.dumps(values)
+		string = self.encoder.encode(values)
 		return HttpResponse(string, content_type='application/json')
 
 	# Update entity from user input
@@ -90,3 +107,33 @@ class provide(object):
 		for (key, value) in validated.items():
 			setattr(entity, key, value)
 		entity.save()
+
+
+class AttachedRessource(Ressource):
+	# Represents a ressource which owning user is not stored as a field,
+	# but determined by the ownership of a foreign key. This is suitable
+	# for models strongly related to other models.
+	def __init__(self, model, foreign, *args, **kwargs):
+		self.foreign = foreign
+		super().__init__(model, *args, **kwargs)
+
+	# Create new entity from model and provide foreign key
+	def create(self, user, values):
+		foreign_model = self.model._meta.get_field(self.foreign).rel.to
+		foreign_entity = foreign_model.objects.get(user=user, id=values[self.foreign])
+		kwargs = {self.foreign: foreign_entity}
+		entity = self.model.objects.create(user=user, **kwargs)
+		del values[self.foreign]
+		self.update(entity, values)
+		return entity
+
+	# Get entity by id or list of all entities
+	# Perform a field lookup at foreign model to determine ownership
+	def get(self, user, id=None):
+		kwargs = {self.foreign + '__user': user}
+		if id:
+			try:
+				return self.model.objects.get(id=id, **kwargs)
+			except self.model.DoesNotExist:
+				raise Http404
+		return self.model.objects.filter(**kwargs)

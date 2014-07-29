@@ -39,7 +39,7 @@
 	<h2>Logo</h2>
 	<label>
 		URL to fetch new image
-		<input ng-model="model.logo" type="url" pattern="^.+$" class="logo" arrow="{down: '.actions'}"/>
+		<input ng-model="model.logo" type="url" class="logo" arrow="{down: '.actions'}"/>
 	</label>
 	<div ng-show="model.logo" class="transparent">
 		<img ng-show="model.logo" ng-src="{{ model.logo }}"/>
