@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.core.files.base import File
 
-from apps.customer.fields import UrlImageField
+from .fields import UrlImageField
 
 
 class Customer(models.Model):

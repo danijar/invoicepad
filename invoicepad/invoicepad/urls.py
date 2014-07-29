@@ -8,12 +8,14 @@ from django.views.decorators.cache import never_cache
 
 
 urlpatterns = patterns('',
-    url(r'^admin/', include(admin.site.urls)),
-    url(r'^$', 'apps.user.views.index', name='index'),
-    url(r'^login/$', 'apps.user.views.login', name='login'),
-    url(r'^logout/$', 'apps.user.views.logout', name='logout'),
-    url(r'^user/$', 'apps.user.views.user', name='user'),
-    url(r'^customer/((?P<id>[0-9]+)/)?$', 'apps.customer.views.customer', name='customer'),
+	url(r'^admin/', include(admin.site.urls)),
+	url(r'^$', 'apps.user.views.index', name='index'),
+	url(r'^login/$', 'apps.user.views.login', name='login'),
+	url(r'^logout/$', 'apps.user.views.logout', name='logout'),
+	url(r'^user/$', 'apps.user.views.user', name='user'),
+	url(r'^customer/((?P<id>[0-9]+)/)?$', 'apps.customer.views.customer', name='customer'),
+	url(r'^project/((?P<id>[0-9]+)/)?$', 'apps.project.views.project', name='project'),
+	url(r'^time/((?P<id>[0-9]+)/)?$', 'apps.project.views.time', name='time'),
 )
 
 # Serve all media files publically

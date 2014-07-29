@@ -1,12 +1,19 @@
 define(['jquery', 'underscore', 'app', 'css!style/console.css'], function($, _, app) {
 	app.controller('console', function($scope) {
 		// Example requests
+		// Split by action and model, support 50% width select fields for that.
 		$scope.presets = [
-			{ name: 'Get all customers',        method: 'GET',    url: '/customer/',    content: '' },
-			{ name: 'Get single customer',      method: 'GET',    url: '/customer/42/', content: '' },
-			{ name: 'Create new customer',      method: 'POST',   url: '/customer/',    content: '{\n    "name": "Customer",\n    "fullname": "",\n    "address1": "",\n    "address2": "",\n    "address3": "",\n    "mail": "",\n    "website": "",\n    "notes": "",\n    "ustid": "",\n    "logo": ""\n}' },
-			{ name: 'Update existing customer', method: 'PUT',    url: '/customer/42/', content: '{\n    "name": "Customer",\n    "fullname": "",\n    "address1": "",\n    "address2": "",\n    "address3": "",\n    "mail": "",\n    "website": "",\n    "notes": "",\n    "ustid": "",\n    "logo": ""\n}' },
-			{ name: 'Delete existing customer', method: 'DELETE', url: '/customer/42/', content: '' },
+			{ name: 'All customers',   method: 'GET',    url: '/customer/',    content: '' },
+			{ name: 'Get customer',    method: 'GET',    url: '/customer/42/', content: '' },
+			{ name: 'Create customer', method: 'POST',   url: '/customer/',    content: '{}' },
+			{ name: 'Update customer', method: 'PUT',    url: '/customer/42/', content: '{\n    "name": "Customer",\n    "fullname": "",\n    "address1": "",\n    "address2": "",\n    "address3": "",\n    "mail": "",\n    "website": "",\n    "notes": "",\n    "ustid": "",\n    "logo": ""\n}' },
+			{ name: 'Delete customer', method: 'DELETE', url: '/customer/42/', content: '' },
+			{ name: '',                method: '',       url: '',              content: '' },
+			{ name: 'All projects',    method: 'GET',    url: '/project/',     content: '' },
+			{ name: 'Get project',     method: 'GET',    url: '/project/42/',  content: '' },
+			{ name: 'Create project',  method: 'POST',   url: '/project/',     content: '{}' },
+			{ name: 'Update project',  method: 'PUT',    url: '/project/42/',  content: '{\n    "invoice": null,\n    "name": "",\n    "description": "",\n    "deadline": null,\n    "agreement": null,\n    "finished": null,\n    "value": 0,\n    "hours": 0\n}' },
+			{ name: 'Delete project',  method: 'DELETE', url: '/project/42/',  content: '' },
 		];
 
 		$scope.send = function() {
