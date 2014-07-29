@@ -1,7 +1,7 @@
 import json
 
 from django.shortcuts import get_object_or_404
-from django.http import HttpResponse, HttpResponseBadRequest
+from django.http import HttpResponse, HttpResponseBadRequest, Http404
 from django.forms.models import model_to_dict
 
 
@@ -29,39 +29,53 @@ class provide(object):
 
 		if request.method == 'GET' and id:
 			# Get single entity
-			entity = get_object_or_404(model, id=id, user=request.user)
-			return show(entity)
+			entity = self.get(request.user, id)
+			return self.show(entity)
 		elif request.method == 'GET':
 			# Get list of all entities
-			entities = self.model.objects.filter(user=request.user)
-			values = entities.values(*self.summary)
-			string = json.dumps(list(values), cls=self.encoder)
-			return HttpResponse(string, content_type='application/json')
+			entities = self.get(request.user)
+			return self.show(entities)
 		elif request.method == 'POST':
 			# Create new entity
-			values = json.loads(request.body.decode('utf-8'))
-			entity = self.model.objects.create(name='', user=request.user)
-			update(entity, values)
-			return show(entity)
+			entity = self.model.objects.create(user=request.user)
+			values = self.parse(request)
+			self.update(entity, values)
+			return self.show(entity)
 		elif request.method == 'PUT' and id:
 			# Update existing models
-			entity = get_object_or_404(self.model, id=id, user=request.user)
-			values = json.loads(request.body.decode('utf-8'))
-			update(entity, values)
-			return show(entity)
+			entity = self.get(request.user, id)
+			values = self.parse(request)
+			self.update(entity, values)
+			return self.show(entity)
 		elif request.method == 'DELETE' and id:
 			# Delete entity
-			entity = get_object_or_404(self.model, id=id, user=request.user)
+			entity = self.get(request.user, id)
 			entity.delete()
 			return HttpResponse()
 		else:
 			# No method available
 			return HttpResponseBadRequest()
 
-	# Respond with serialized entity
+	def parse(self, request):
+		values = json.loads(request.body.decode('utf-8'))
+		return values
+
+	# Get entity by id or list of all entities
+	def get(self, user, id=None):
+		if id:
+			try:
+				return self.model.objects.get(id=id, user=user)
+			except self.model.DoesNotExist:
+				raise Http404
+		return self.model.objects.filter(user=user)
+
+	# Respond with serialized entity or list of entities
 	def show(self, entity):
-		values = model_to_dict(entity)
-		del values['user']
+		if isinstance(entity, self.model):
+			values = model_to_dict(entity)
+			del values['user']
+		else:
+			values = list(entity.values(*self.summary))
 		string = json.dumps(values, cls=self.encoder) if self.encoder else json.dumps(values)
 		return HttpResponse(string, content_type='application/json')
 

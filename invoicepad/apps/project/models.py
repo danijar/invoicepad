@@ -14,7 +14,7 @@ class Project(models.Model):
 	agreement   = models.DateField(null=True, default=now)
 	finished    = models.DateField(null=True)
 	value       = models.IntegerField(null=True)
-	hours       = models.PositiveIntegerField(null=True, default=0)
+	hours       = models.PositiveIntegerField(default=0)
 	def __str__(self):
 		return self.name
 

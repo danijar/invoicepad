@@ -39,13 +39,13 @@
 	<h2>Logo</h2>
 	<label>
 		URL to fetch new image
-		<input ng-model="upload" type="url" class="upload" value="" arrow="{down: '.actions'}"/>
+		<input ng-model="model.logo" type="url" pattern="^.+$" class="logo" arrow="{down: '.actions'}"/>
 	</label>
 	<div ng-show="model.logo" class="transparent">
-		<img ng-src="{{ model.logo }}"></div>
+		<img ng-show="model.logo" ng-src="{{ model.logo }}"/>
 	</div><br>
 
-	<div class="actions" arrow="{up: '.upload'}" arrows="{on: 'a', left: 'prev', right: 'next'}">
+	<div class="actions" arrow="{up: '.logo'}" arrows="{on: 'a', left: 'prev', right: 'next'}">
 		<a ng-click="save()" class="button primary">Save</a>
 		<a ng-click="delete()" class="button">Delete</a>
 		<a ng-click="random()" class="button">Random</a>

@@ -1,6 +1,8 @@
 define(['jquery', 'underscore', 'app', 'helper/message', 'css!style/customer.css'], function($, _, app, Message) {
 	app.controller('customer', ['$scope', '$routeParams', '$location', function($scope, $routeParams, $location) {
 
+		setInterval(function() { console.log(typeof $scope.model.logo, $scope.model.logo); }, 1000);
+
 		// Fetch model id from route
 		var id = $routeParams.id;
 
@@ -16,7 +18,6 @@ define(['jquery', 'underscore', 'app', 'helper/message', 'css!style/customer.css
 			deferred.done(function(model) {
 				$scope.$apply(function() {
 					$scope.model = model;
-					
 					// Keep copy to compare changes
 					$scope.initial = $.extend({}, model);
 				});
@@ -28,9 +29,17 @@ define(['jquery', 'underscore', 'app', 'helper/message', 'css!style/customer.css
 			});
 		}
 
+		// Restore initial logo if field cleared
+		$scope.$watch('model.logo', function() {
+			if (!$scope.model)
+				return;
+			if ($scope.model.logo.length < 1)
+				$scope.model.logo = $scope.initial.logo;
+		});
+
 		function changes() {
 			// List of field ids
-			var fields = ['name', 'fullname', 'mail', 'website', 'address1', 'address2', 'address3', 'notes'];
+			var fields = ['name', 'fullname', 'mail', 'website', 'address1', 'address2', 'address3', 'notes', 'logo'];
 
 			// Read field values into a map
 			var values = {};
@@ -46,10 +55,6 @@ define(['jquery', 'underscore', 'app', 'helper/message', 'css!style/customer.css
 				}
 			});
 
-			// Upload new logo if provided
-			if ($scope.upload)
-				values.logo = $scope.upload.trim();
-
 			return values;
 		}
 
@@ -60,6 +65,7 @@ define(['jquery', 'underscore', 'app', 'helper/message', 'css!style/customer.css
 			// Skip if no changes were made
 			if (!Object.keys(content).length) {
 				$scope.message = 'You did not make any changes.';
+				console.log($scope.model.logo);
 				return;
 			}
 
@@ -145,7 +151,7 @@ define(['jquery', 'underscore', 'app', 'helper/message', 'css!style/customer.css
 
 			// Logo from Stackexchange sites
 			var sites = 'stackoverflow serverfault superuser stackexchangemeta webapps webmasters math gamedev diy photo stats gis stackapps gaming unix tex english rpg programmers electronics cstheory sharepoint drupal mathematica workplace patents'.split(' ');
-			$scope.upload = 'http://cdn.sstatic.net/' + _.sample(sites) + '/img/apple-touch-icon.png';
+			$scope.model.logo = 'http://cdn.sstatic.net/' + _.sample(sites) + '/img/apple-touch-icon.png';
 		};
 
 		load();

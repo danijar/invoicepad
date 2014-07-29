@@ -8,15 +8,15 @@ from .fields import UrlImageField
 class Customer(models.Model):
     user     = models.ForeignKey(User)
     name     = models.CharField(max_length=127)
-    mail     = models.EmailField(max_length=255, blank=True)
-    website  = models.URLField(max_length=127, blank=True)
-    fullname = models.CharField(max_length=127, blank=True)
-    address1 = models.CharField(max_length=63, blank=True)
-    address2 = models.CharField(max_length=63, blank=True)
-    address3 = models.CharField(max_length=63, blank=True)
-    ustid    = models.CharField(max_length=15, blank=True)
-    notes    = models.TextField(blank=True)
-    logo     = UrlImageField(upload_to='customer/logo', null=True, blank=True)
+    mail     = models.EmailField(max_length=255)
+    website  = models.URLField(max_length=127)
+    fullname = models.CharField(max_length=127)
+    address1 = models.CharField(max_length=63)
+    address2 = models.CharField(max_length=63)
+    address3 = models.CharField(max_length=63)
+    ustid    = models.CharField(max_length=15)
+    notes    = models.TextField()
+    logo     = UrlImageField(upload_to='customer/logo', null=True)
 
     def delete(self, using=None):
         if isinstance(self.logo, File):

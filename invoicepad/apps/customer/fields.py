@@ -31,8 +31,9 @@ class UrlImageFileDescriptor(ImageFileDescriptor):
 					name = str(uuid.uuid4()) + '.' + format
 					value = ContentFile(image, name)
 				except:
+					# Anyway initialize field with None
 					print('Error fetching', value)
-					pass
+					value = None
 		super().__set__(instance, value)
 
 
