@@ -23,7 +23,7 @@ define(['app', 'css!style/dashboard.css'], function(app) {
 
 		load('/user/', 'user');
 		load('/customer/', 'customers');
-		$scope.projects = [];
+		load('/project/', 'projects');
 		$scope.invoices = [];
 	});
 });

@@ -1,5 +1,5 @@
-define(['jquery', 'underscore', 'app', 'css!style/customers.css'], function($, _, app) {
-	app.controller('customers', ['$scope', '$routeParams', '$location', function($scope, $routeParams, $location) {
+define(['jquery', 'underscore', 'app', 'css!style/projects.css'], function($, _, app) {
+	app.controller('projects', ['$scope', '$routeParams', '$location', function($scope, $routeParams, $location) {
 
 		$scope.models = [];
 
@@ -8,7 +8,7 @@ define(['jquery', 'underscore', 'app', 'css!style/customers.css'], function($, _
 			var deferred = $.ajax({
 				dataType: 'json',
 				method: 'GET',
-				url: '/customer/',
+				url: '/project/',
 			});
 
 			// Inject into scope
@@ -34,7 +34,7 @@ define(['jquery', 'underscore', 'app', 'css!style/customers.css'], function($, _
 			var deferred = $.ajax({
 				dataType: 'json',
 				method: 'POST',
-				url: '/customer/',
+				url: '/project/',
 				data: JSON.stringify(content),
 			});
 
@@ -44,7 +44,7 @@ define(['jquery', 'underscore', 'app', 'css!style/customers.css'], function($, _
 					$scope.models.push(model);
 
 					// Head over to form
-					$location.path('/customer/' + model.id);
+					$location.path('/project/' + model.id);
 				});
 			}).error(function(e) {
 				$scope.$apply(function() {

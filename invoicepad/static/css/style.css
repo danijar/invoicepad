@@ -50,6 +50,7 @@ input.search { padding-right: 2.5em !important; background-image: url(../img/sea
 .table li > *, .table li a > * { display: inline-block; position: relative; margin-right: .5em; vertical-align: middle; }
 .table li > * { margin-right: 1em; }
 .table li > a:first-child:hover { border-bottom: none; }
+.table li > *:first-child > *:first-child { margin-left: .5em; }
 .table li .logo { width: 3em; height: 2em; margin: 0 .5em; background: center no-repeat; background-size: contain; }
 .table li h2 { font-size: 1.2em; height: 1.3em; }
 .table li h3 { font-size: 1.1em; height: 1.2em; }

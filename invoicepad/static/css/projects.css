@@ -1,0 +1,15 @@
+/* tools */
+.projects h1 { display: inline-block; }
+.projects .tools > * { display: inline-block; vertical-align: middle; }
+.projects .tools input[type=text] { width: 15em; margin: 1px 1em 0 0; padding: .6em; }
+.projects .tools a.button { margin: 0; }
+
+/* table */
+.projects .hours, .projects .value { text-align: right; }
+.projects .agreement, .projects .finished, .projects .deadline { padding-left: 2em; background-repeat: no-repeat; background-size: auto 100%; }
+.projects .agreement { background-image: url(../img/project/agreement.png); }
+.projects .finished { background-image: url(../img/project/finished.png); }
+.projects .deadline { background-image: url(../img/project/deadline.png); }
+
+/* message */
+.projects .message { margin-top: 0; }

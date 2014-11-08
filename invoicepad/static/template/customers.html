@@ -12,7 +12,7 @@
 			<a ng-switch="!!model.logo" href="/#/customer/{{ model.id }}">
 				<div ng-switch-when="true" class="logo" style="background-image: url(/media/{{ model.logo }})"></div>
 				<div ng-switch-default     class="logo" style="background-image: url(/static/img/customer/logo.png)"></div>
-				<h2>{{ model.name }}</h2>
+				<h2>{{ model.name || "Unnamed" }}</h2>
 			</a>
 			<span><a href="{{ model.website }}" target="_blank">{{ model.website | domain }}</a></span>
 			<span><a href="mailto:<%= model.mail %>">{{ model.mail }}</a></span>

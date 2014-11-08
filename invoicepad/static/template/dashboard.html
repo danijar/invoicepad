@@ -16,7 +16,7 @@
 				<a ng-switch="!!model.logo" href="/#/customer/{{ model.id }}">
 					<div ng-switch-when="true" class="logo" style="background-image: url(/media/{{ model.logo }})"></div>
 					<div ng-switch-default     class="logo" style="background-image: url(/static/img/customer/logo.png)"></div>
-					<h3>{{ model.name }}</h3>
+					<h3>{{ model.name || "Unnamed" }}</h3>
 				</a>
 			</li>
 			<li ng-hide="customers.length" class="disabled center"><h3>No customers yet.</h3></li>
@@ -31,7 +31,7 @@
 		</div>
 		<ul class="table" arrows="{on: 'li', up: 'prev', down: 'next', mouse: true}" relax>
 			<li ng-repeat="model in projects | limitTo:5">
-				<a href="/#/project/{{ model.id }}"><h3>{{ model.name }}</h3></a>
+				<a href="/#/project/{{ model.id }}"><h3>{{ model.name || "Unnamed" }}</h3></a>
 			</li>
 			<li ng-hide="projects.length" class="disabled center"><h3>No projects yet.</h3></li>
 		</ul>
@@ -45,7 +45,7 @@
 		</div>
 		<ul class="table" arrows="{on: 'li', up: 'prev', down: 'next', mouse: true}" relax>
 			<li ng-repeat="model in invoices | limitTo:5">
-				<a href="/#/invoice/{{ model.id }}"><h3>{{ model.name }}</h3></a>
+				<a href="/#/invoice/{{ model.id }}"><h3>{{ model.name || "Unnamed" }}</h3></a>
 			</li>
 			<li ng-hide="invoices.length" class="disabled center"><h3>No invoices yet.</h3></li>
 		</ul>
