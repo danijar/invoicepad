@@ -1,0 +1,42 @@
+<section class="project" arrows="{on: 'input', down: 'parent nextAll find input:enabled first', up: 'parent prevAll find input:enabled last', mouse: false}">
+	<h1>{{ model.name }}</h1>
+
+	<h2>General</h2>
+	<label>
+		Name
+		<input ng-model="model.name" type="text" autofocus/>
+	</label>
+	<label>
+		Agreement
+		<input ng-model="model.agreement" type="date"/>
+	</label>
+	<label>
+		Deadline
+		<input ng-model="model.deadline" type="date"/>
+	</label>
+	<label>
+		Finished
+		<input type="checkbox"/>
+		<input ng-model="model.finished" type="date" disabled/>
+	</label>
+	<label>
+		Description
+		<textarea ng-model="model.description" rows="7"></textarea>
+	</label>
+
+	<h2>Time</h2>
+
+	<h2>Invoice</h2>
+	<label>
+		Placeholder
+		<input class="placeholder" type="text" arrow="{down: '.actions'}">
+	</label>
+
+	<div class="actions" arrow="{up: '.placeholder'}" arrows="{on: 'a', left: 'prev', right: 'next'}">
+		<a ng-click="save()" class="button primary">Save</a>
+		<a ng-click="delete()" class="button">Delete</a>
+		<a ng-click="random()" class="button">Random</a>
+		<a ng-click="abort()" class="button">Abort</a>
+	</div>
+	<p ng-show="message" class="message">{{ message }}</p>
+</section>

@@ -1,5 +1,5 @@
-define(['jquery', 'underscore', 'app', 'helper/message', 'css!style/customer.css'], function($, _, app, Message) {
-	app.controller('customer', ['$scope', '$routeParams', '$location', function($scope, $routeParams, $location) {
+define(['jquery', 'underscore', 'app', 'helper/message', 'css!style/project.css'], function($, _, app, Message) {
+	app.controller('project', ['$scope', '$routeParams', '$location', function($scope, $routeParams, $location) {
 		// Fetch model id from route
 		var id = $routeParams.id;
 
@@ -8,7 +8,7 @@ define(['jquery', 'underscore', 'app', 'helper/message', 'css!style/customer.css
 			var deferred = $.ajax({
 				dataType: 'json',
 				method: 'GET',
-				url: '/customer/' + id + '/',
+				url: '/project/' + id + '/',
 			});
 
 			// Inject into scope
@@ -26,17 +26,9 @@ define(['jquery', 'underscore', 'app', 'helper/message', 'css!style/customer.css
 			});
 		}
 
-		// Restore initial logo if field cleared
-		$scope.$watch('model.logo', function() {
-			if (!$scope.model)
-				return;
-			if ($scope.model.logo.length < 1)
-				$scope.model.logo = $scope.initial.logo;
-		});
-
 		function changes() {
 			// List of field ids
-			var fields = ['name', 'fullname', 'mail', 'website', 'address1', 'address2', 'address3', 'notes', 'logo'];
+			var fields = ['name', 'description', 'deadline', 'agreement', 'finished', 'value', 'hours'];
 
 			// Read field values into a map
 			var values = {};
@@ -69,7 +61,7 @@ define(['jquery', 'underscore', 'app', 'helper/message', 'css!style/customer.css
 			var deferred = $.ajax({
 				dataType: 'json',
 				method: 'PUT',
-				url: '/customer/' + id + '/',
+				url: '/project/' + id + '/',
 				data: JSON.stringify(content),
 			});
 
@@ -78,7 +70,7 @@ define(['jquery', 'underscore', 'app', 'helper/message', 'css!style/customer.css
 				$scope.$apply(function() {
 					$scope.model = model;
 					$scope.message = 'All changes saved.';
-					$location.path('/customer');
+					$location.path('/project');
 				});
 			}).error(function(e) {
 				$scope.$apply(function() {
@@ -90,20 +82,20 @@ define(['jquery', 'underscore', 'app', 'helper/message', 'css!style/customer.css
 
 		$scope.delete = function() {
 			// Ask user to confirm
-			if (!confirm("Please confirm to delete customer '" + $scope.model.name + "' permanently."))
+			if (!confirm("Please confirm to delete project '" + $scope.model.name + "' permanently."))
 				return;
 
 			// Send request to server
 			var deferred = $.ajax({
 				method: 'DELETE',
-				url: '/customer/' + id + '/',
+				url: '/project/' + id + '/',
 			});
 
 			// Sync back validated model
 			deferred.done(function() {
 				$scope.$apply(function() {
-					$scope.message = 'This customer was deleted.';
-					$location.path('/customer');
+					$scope.message = 'This project was deleted.';
+					$location.path('/project');
 				});
 			}).error(function(e) {
 				$scope.$apply(function() {
@@ -119,7 +111,7 @@ define(['jquery', 'underscore', 'app', 'helper/message', 'css!style/customer.css
 
 			// Ask user to confirm if there are changes
 			if (!changed || confirm('Unsaved changes will be discarded.'))
-				$location.path('/customer');
+				$location.path('/project');
 		}
 
 		$scope.random = function() {
@@ -137,17 +129,7 @@ define(['jquery', 'underscore', 'app', 'helper/message', 'css!style/customer.css
 			// Generate random model data
 			var domain = _.sample(words, pick(2)).join('-').toLowerCase();
 			$scope.model.name = _.sample(words, 1 + pick(1)).join(' ');
-			$scope.model.fullname = _.sample(words, 1 + pick(2)).join(' ');
-			$scope.model.mail = _.sample(words).toLowerCase() + '@' + domain + '.com';
-			$scope.model.website = 'http://www.' + domain + '.com';
-			$scope.model.address1 = _.sample(words, pick(3)).join(' ') + ' ' + pick(100);
-			$scope.model.address2 = postal() + ' ' + _.sample(words, pick(2)).join(' ');
-			$scope.model.address3 = _.sample(words, 2).join(' ');
-			$scope.model.notes = text();
-
-			// Logo from Stackexchange sites
-			var sites = 'stackoverflow serverfault superuser stackexchangemeta webapps webmasters math gamedev diy photo stats gis stackapps gaming unix tex english rpg programmers electronics cstheory sharepoint drupal mathematica workplace patents'.split(' ');
-			$scope.model.logo = 'http://cdn.sstatic.net/' + _.sample(sites) + '/img/apple-touch-icon.png';
+			$scope.model.description = text();
 		};
 
 		load();
