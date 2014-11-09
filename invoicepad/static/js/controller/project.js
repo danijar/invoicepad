@@ -43,7 +43,13 @@ define(['jquery', 'underscore', 'app', 'helper/message', 'css!style/project.css'
 				url: '/project/' + id + '/time/',
 			}).done(function(times) {
 				$scope.$apply(function() {
-					$scope.times = times;
+					// Convert to dictionary with id as key
+					$scope.times = {};
+					$scope.initial_times = {};
+					_.each(times, function(time) {
+						$scope.times[time.id] = time;
+						$scope.initial_times[time.id] = $.extend({}, time);
+					});
 				});
 			}).error(function(e) {
 				$scope.$apply(function() {
@@ -66,6 +72,30 @@ define(['jquery', 'underscore', 'app', 'helper/message', 'css!style/project.css'
 					var changed = true;
 					if (field in $scope.initial)
 						changed = (value != $scope.initial[field]);
+					if (changed)
+						values[field] = value;
+				}
+			});
+
+			return values;
+		}
+
+		function changes_time(id) {
+			if (!(id in $scope.times))
+				throw 'Time with this id does not exist.';
+
+			// List of field ids
+			var fields = ['message', 'start', 'end'];
+
+			// Read field values into a map
+			var values = {};
+			fields.map(function(field) {
+				if (field in $scope.times[id]) {
+					// Filter changes
+					var value = $scope.times[id][field];
+					var changed = true;
+					if (field in $scope.initial_times[id])
+						changed = (value != $scope.initial_times[id][field]);
 					if (changed)
 						values[field] = value;
 				}
@@ -127,6 +157,36 @@ define(['jquery', 'underscore', 'app', 'helper/message', 'css!style/project.css'
 			});
 		};
 
+		$scope.save_time = function(id) {
+			// Get changes
+			var content = changes_time(id);
+
+			// Skip if no changes were made
+			if (!Object.keys(content).length) {
+				console.log('Left field without changes.');
+				return;
+			}
+
+			// Send request to server
+			$.ajax({
+				dataType: 'json',
+				method: 'PUT',
+				url: '/time/' + id + '/',
+				data: JSON.stringify(content),
+			}).done(function(time) {
+				$scope.$apply(function() {
+					// Add to scope
+					$scope.times[time.id] = time;
+					$scope.initial_times[time.id] = $.extend({}, time);
+				});
+			}).error(function(e) {
+				$scope.$apply(function() {
+					console.error(e);
+					$scope.message = 'There was an error sending the request.';
+				});
+			});
+		}
+
 		$scope.delete = function() {
 			// Ask user to confirm
 			if (!confirm("Please confirm to delete project '" + $scope.model.name + "' permanently."))
@@ -162,9 +222,7 @@ define(['jquery', 'underscore', 'app', 'helper/message', 'css!style/project.css'
 		}
 
 		$scope.create_time = function() {
-			var content = {
-				project: id
-			};
+			var content = { project: id };
 
 			// Send request to server
 			$.ajax({
@@ -174,8 +232,8 @@ define(['jquery', 'underscore', 'app', 'helper/message', 'css!style/project.css'
 				data: JSON.stringify(content),
 			}).done(function(time) {
 				$scope.$apply(function() {
-					// Add to list
-					$scope.times.push(time);
+					// Add to scope
+					$scope.times[time.id] = time;
 				});
 			}).error(function(e) {
 				$scope.$apply(function() {
@@ -183,6 +241,15 @@ define(['jquery', 'underscore', 'app', 'helper/message', 'css!style/project.css'
 					$scope.message = 'There was an error sending the request.';
 				});
 			});
+		}
+
+		// Template helpers
+		$scope.dict_length = function(dict) {
+			if (typeof dict === 'object') {
+				console.log(Object.keys(dict));
+				return Object.keys(dict).length;
+			}
+			return 0;
 		}
 
 		$scope.random = function() {

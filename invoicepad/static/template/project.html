@@ -16,6 +16,8 @@
 	</label>
 	<label>
 		<input ng-model="model.has_finished" type="checkbox" ng-checked="model.finished"/> Finished
+	</label>
+	<label>
 		<input ng-model="model.finished" type="date" placeholder="yyyy-MM-dd" ng-disabled="!model.has_finished"/>
 	</label>
 	<label>
@@ -28,21 +30,31 @@
 		<a class="button" ng-click="create_time()" tabindex="0">Add time</a>
 	</span>
 	<span>
-		<ul class="table" arrow="{up: '.button', down: '.placeholder'}" arrows="{on: 'li', up: 'prev', down: 'next :not(.ignore)', mouse: false}" relax>
-			<li ng-repeat="time in times | orderBy:'start':true">
+		<ul class="table"
+			arrow="{up: '.button', down: '.placeholder'}"
+			arrows="{on: 'li', up: 'prev', down: 'next :not(.ignore)', right: 'find input', mouse: false}"
+			relax>
+
+			<li ng-repeat="time in times | toArray | orderBy:'-start'"
+				class="row-{{$index}}"
+				ng-class="{last: $index == dict_length(times) - 1}">
+
 				<span><span ng-init="elapsed = (time.end.getTime() - time.start.getTime()) / (1000 * 60)">{{ elapsed }}min</span></span>
-				<span><input ng-model="time.message" type="text"/></span>
+				<span><input ng-model="time.message"
+							 type="text"
+							 ng-blur="save_time(time.id)"
+							 arrow="{up: '.row-' + ($index - 1) + ' input', down: '.row-' + ($index + 1) + ' input', left: '.row-' + $index}"/></span>
 				<span>{{ time.start | date:'yyyy-MM-dd H:mm'}}</span>
 				<span>{{ time.end | date:'yyyy-MM-dd H:mm'}}</span>
 			</li>
-			<li ng-hide="times.length" class="disabled center ignore"><h3>No times yet.</h3></li>
+			<li ng-hide="dict_length(times) > 0" class="disabled center ignore"><h3>No times yet.</h3></li>
 		</ul>
 	</span>
 
 	<h2>Invoice</h2>
 	<label>
 		Placeholder
-		<input class="placeholder" type="text" arrow="{down: '.actions'}">
+		<input class="placeholder" type="text" arrow="{up: '.table .last', down: '.actions'}">
 	</label>
 
 	<div class="actions" arrow="{up: '.placeholder'}" arrows="{on: 'a', left: 'prev', right: 'next'}">
