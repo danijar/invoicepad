@@ -10,9 +10,9 @@
 	<ul class="table" arrow="{up: 'input'}" arrows="{on: 'li', up: 'prev', down: 'next', mouse: true}" relax>
 		<li ng-repeat="model in models | orderBy:'name' | filter:search">
 			<a href="/#/project/{{ model.id }}"><h2>{{ model.name || "Unnamed" }}</h2></a>
-			<span class="deadline">{{ model.deadline || "None" }}</span>
-			<span class="agreement">{{ model.agreement || "None" }}</span>
-			<span class="finished">{{ model.finished || "None" }}</span>
+			<span class="deadline" title="Deadline">{{ model.deadline || "None" }}</span>
+			<span class="agreement" title="Agreement">{{ model.agreement || "None" }}</span>
+			<span class="finished" title="{{ model.finished ? 'Finished' : 'Not finished' }}">{{ model.finished || "None" }}</span>
 			<span class="value">{{ model.value || 0 }}€</span>
 			<span class="hours">{{ model.hours || 0 }} hours</a></span>
 			<span ng-show="model.invoice"><a href="/#/invoice/<%= model.invoice %>">Invoice</a></span>

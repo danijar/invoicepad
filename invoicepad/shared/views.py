@@ -3,6 +3,7 @@ import json
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponse, HttpResponseBadRequest, Http404
 from django.forms.models import model_to_dict
+from django.db.models.query import QuerySet
 
 
 class Encoder(json.JSONEncoder):
@@ -17,10 +18,11 @@ class Encoder(json.JSONEncoder):
 
 
 class Ressource(object):
-	def __init__(self, model, allowed, summary=None, treats={}):
+	def __init__(self, model, allowed, summary=None, foreigns=[], treats={}):
 		self.model = model
 		self.allowed = allowed
 		self.summary = summary
+		self.foreigns = foreigns
 		self.encoder = Encoder(treats)
 
 		# Fall back to allowed and id for summary
@@ -30,15 +32,25 @@ class Ressource(object):
 			self.summary = allowed
 			self.summary.append('id')
 
-	def provide(self, request, id):
+	def provide(self, request, id, foreign=None):
 		# Require login
 		if request.user.is_anonymous():
 			return HttpResponse('Unauthorized', status=401)
 
-		# Ensure integer type
+		# Ensure parameter types
 		id = int(id) if id else None
+		foreign = str(foreign) if foreign else None
 
-		if request.method == 'GET' and id:
+		if request.method == 'GET' and id and foreign:
+			# Get list of entities this has a foreign key to
+			if not foreign in self.foreigns:
+				return HttpResponseBadRequest()
+			entity = self.get(request.user, id)
+			if not hasattr(entity, foreign + '_set'):
+				raise Http404()
+			entities = getattr(entity, foreign + '_set').all()
+			return self.show(entities)
+		elif request.method == 'GET' and id:
 			# Get single entity
 			entity = self.get(request.user, id)
 			return self.show(entity)
@@ -87,12 +99,22 @@ class Ressource(object):
 		return self.model.objects.filter(user=user)
 
 	# Respond with serialized entity or list of entities
-	def show(self, entity):
-		if isinstance(entity, self.model):
-			values = model_to_dict(entity)
+	def show(self, data):
+		if isinstance(data, self.model):
+			# Data is an entity of our model
+			values = model_to_dict(data)
 			del values['user']
+		elif isinstance(data, QuerySet) and data.model is self.model:
+			# Data is a queryset of entities of our model,
+			# filter summary fileds for list requests
+			values = list(data.values(*self.summary))
+		elif isinstance(data, QuerySet):
+			# Data is a queryset of an unknown model, so
+			# just convert it to a list
+			values = list(data)
 		else:
-			values = list(entity.values(*self.summary))
+			# Data is unknown, perform no conversion
+			values = data
 		string = self.encoder.encode(values)
 		return HttpResponse(string, content_type='application/json')
 

@@ -14,7 +14,7 @@ urlpatterns = patterns('',
 	url(r'^logout/$', 'apps.user.views.logout', name='logout'),
 	url(r'^user/$', 'apps.user.views.user', name='user'),
 	url(r'^customer/((?P<id>[0-9]+)/)?$', 'apps.customer.views.customer', name='customer'),
-	url(r'^project/((?P<id>[0-9]+)/)?$', 'apps.project.views.project', name='project'),
+	url(r'^project/((?P<id>[0-9]+)/((?P<foreign>[a-z]+)/)?)?$', 'apps.project.views.project', name='project'),
 	url(r'^time/((?P<id>[0-9]+)/)?$', 'apps.project.views.time', name='time'),
 )
 
