@@ -3,7 +3,8 @@
 .project .actions .button { vertical-align: top; }
 
 /* form */
-input[type=date], input[type=checkbox] { display: block; }
+input[type=date] { display: block; }
+input[type=checkbox] { margin-bottom: 0; }
 
 /* message */
 .project .message { margin: 1.5em -1.5em -1.5em; }

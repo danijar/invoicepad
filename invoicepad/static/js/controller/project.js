@@ -14,9 +14,20 @@ define(['jquery', 'underscore', 'app', 'helper/message', 'css!style/project.css'
 			// Inject into scope
 			deferred.done(function(model) {
 				$scope.$apply(function() {
+					// Parse dates
+					if ('deadline' in model && model.deadline)
+						model.deadline = new Date(model.deadline);
+					if ('agreement' in model && model.agreement)
+						model.agreement = new Date(model.agreement);
+					if ('finished' in model && model.finished)
+						model.finished = new Date(model.finished);
+
 					$scope.model = model;
 					// Keep copy to compare changes
 					$scope.initial = $.extend({}, model);
+
+					// Initialize finished checkbox
+					$scope.model.has_finished = !!('finished' in model && model.finished);
 				});
 			}).error(function(e) {
 				$scope.$apply(function() {
@@ -48,6 +59,10 @@ define(['jquery', 'underscore', 'app', 'helper/message', 'css!style/project.css'
 		}
 
 		$scope.save = function() {
+			// Remove finished date if unchecked
+			if (!$scope.model.has_finished)
+				$scope.model.finished = null;
+
 			// Get changes
 			var content = changes();
 
@@ -56,6 +71,14 @@ define(['jquery', 'underscore', 'app', 'helper/message', 'css!style/project.css'
 				$scope.message = 'You did not make any changes.';
 				return;
 			}
+
+			// Serialize dates
+			if ('deadline' in content && content.deadline)
+				content.deadline = content.deadline.toISOString().slice(0, 10);
+			if ('agreement' in content && content.agreement)
+				content.agreement = content.agreement.toISOString().slice(0, 10);
+			if ('finished' in content && content.finished)
+				content.finished = content.finished.toISOString().slice(0, 10);
 
 			// Send request to server
 			var deferred = $.ajax({
@@ -68,6 +91,14 @@ define(['jquery', 'underscore', 'app', 'helper/message', 'css!style/project.css'
 			// Sync back validated model
 			deferred.done(function(model) {
 				$scope.$apply(function() {
+					// Parse dates
+					if ('deadline' in model && model.deadline)
+						model.deadline = new Date(model.deadline);
+					if ('agreement' in model && model.agreement)
+						model.agreement = new Date(model.agreement);
+					if ('finished' in model && model.finished)
+						model.finished = new Date(model.finished);
+
 					$scope.model = model;
 					$scope.message = 'All changes saved.';
 					$location.path('/project');
@@ -124,11 +155,15 @@ define(['jquery', 'underscore', 'app', 'helper/message', 'css!style/project.css'
 			function titleCase(word) { return word[0].toUpperCase() + word.substr(1); }
 			function sentence() { var text = _.sample(words); var length = 5 + pick(10); for (var i = 0; i < length; ++i) text += ' ' + _.sample(words).toLowerCase(); return text + '.'; }
 			function text() { var text = sentence(); var length = 5 + pick(10); for (var i = 0; i < length; ++i) text += ' ' + sentence(); return text; }
-			function postal() { var text = ''; for (var i = 0; i < 5; ++i) text += pick(9); return text; }
+			function offset(date, offset) { var result = new Date(date); result.setMonth(result.getMonth() + offset); return result; }
+			function date(past, future) { return new Date(past.getTime() + Math.random() * (future.getTime() - past.getTime())); }
 
 			// Generate random model data
-			var domain = _.sample(words, pick(2)).join('-').toLowerCase();
 			$scope.model.name = _.sample(words, 1 + pick(1)).join(' ');
+			$scope.model.agreement = date(offset(new Date(), -3), new Date());
+			$scope.model.deadline = date(offset($scope.model.agreement, 1), offset(new Date(), 3));
+			if (Math.random() > .5) { $scope.model.finished = date(offset($scope.model.agreement, 1), new Date()); $scope.model.has_finished = true; }
+			else { $scope.model.finished = null; $scope.model.has_finished = false; }
 			$scope.model.description = text();
 		};
 

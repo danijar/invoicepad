@@ -7,17 +7,16 @@
 		<input ng-model="model.name" type="text" autofocus/>
 	</label>
 	<label>
-		Agreement
-		<input ng-model="model.agreement" type="date"/>
-	</label>
-	<label>
 		Deadline
-		<input ng-model="model.deadline" type="date"/>
+		<input ng-model="model.deadline" type="date" placeholder="yyyy-MM-dd"/>
 	</label>
 	<label>
-		Finished
-		<input type="checkbox"/>
-		<input ng-model="model.finished" type="date" disabled/>
+		Agreement
+	<input ng-model="model.agreement" type="date" placeholder="yyyy-MM-dd"/>
+	</label>
+	<label>
+		<input ng-model="model.has_finished" type="checkbox" ng-checked="model.finished"/> Finished
+		<input ng-model="model.finished" type="date" placeholder="yyyy-MM-dd" ng-disabled="!model.has_finished"/>
 	</label>
 	<label>
 		Description
