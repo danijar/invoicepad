@@ -17,6 +17,6 @@
 			<span class="hours">{{ model.hours || 0 }} hours</a></span>
 			<span ng-show="model.invoice"><a href="/#/invoice/<%= model.invoice %>">Invoice</a></span>
 		</li>
-		<li ng-hide="models.length" class="disabled center"><h3>No projects yet.</h3></li>
+		<li ng-hide="models.length" class="disabled center ignore"><h3>No projects yet.</h3></li>
 	</ul>
 </section>

@@ -55,6 +55,10 @@ input.search { padding-right: 2.5em !important; background-image: url(../img/sea
 .table li h2 { font-size: 1.2em; height: 1.3em; }
 .table li h3 { font-size: 1.1em; height: 1.2em; }
 
+/* table input */
+.table input[type=text], .table input[type=password], .table input[type=email], .table input[type=url], .table input[type=date] { margin: .8em 0; }
+.table input[type=text]:not(:focus), .table input[type=password]:not(:focus), .table input[type=email]:not(:focus), .table input[type=url]:not(:focus), .table input[type=date]:not(:focus) { border-color: #ddd; }
+
 /* message */
 .message { padding: 1.5em; color: #000; background-color: #ddd; overflow: auto; /* rgb(50, 134, 200) */ }
 .message.success { background-color: rgba(50, 200, 50, 0.2); border-color: rgb(50, 200, 50); }

@@ -9,6 +9,6 @@ from .models import Customer
 def customer(request, id):
 	allowed = ['name', 'fullname', 'address1', 'address2', 'address3', 'mail', 'website', 'notes', 'ustid', 'logo']
 	summary = ['id', 'name', 'website', 'mail', 'logo']
-	treats = {ImageFieldFile: (lambda x: x.url if x else None)}
-	ressource = Ressource(Customer, allowed, summary, treats=treats)
+	json_traits = {ImageFieldFile: (lambda x: x.url if x else None)}
+	ressource = Ressource(Customer, allowed, summary, json_traits=json_traits)
 	return ressource.provide(request, id)

@@ -1,4 +1,4 @@
-<section class="project" arrows="{on: 'input', down: 'parent nextAll find input:enabled first', up: 'parent prevAll find input:enabled last', mouse: false}">
+<section class="project" arrows="{on: 'input,.button', down: 'parent nextAll find input:enabled,.button,.table first', up: 'parent prevAll find input:enabled,.button,.table last', mouse: false}">
 	<h1>{{ model.name }}</h1>
 
 	<h2>General</h2>
@@ -24,10 +24,20 @@
 	</label>
 
 	<h2>Time</h2>
-	<label>
-		Placeholder
-		<input type="text">
-	</label>
+	<span>
+		<a class="button" ng-click="create_time()" tabindex="0">Add time</a>
+	</span>
+	<span>
+		<ul class="table" arrow="{up: '.button', down: '.placeholder'}" arrows="{on: 'li', up: 'prev', down: 'next :not(.ignore)', mouse: false}" relax>
+			<li ng-repeat="time in times | orderBy:'start':true">
+				<span><span ng-init="elapsed = (time.end.getTime() - time.start.getTime()) / (1000 * 60)">{{ elapsed }}min</span></span>
+				<span><input ng-model="time.message" type="text"/></span>
+				<span>{{ time.start | date:'yyyy-MM-dd H:mm'}}</span>
+				<span>{{ time.end | date:'yyyy-MM-dd H:mm'}}</span>
+			</li>
+			<li ng-hide="times.length" class="disabled center ignore"><h3>No times yet.</h3></li>
+		</ul>
+	</span>
 
 	<h2>Invoice</h2>
 	<label>

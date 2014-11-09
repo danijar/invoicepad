@@ -10,10 +10,13 @@ define(['app', 'jquery'], function(app, $) {
 					// Remove forced widths
 					$($element).children().children().css('width', '');
 
-					// Find maximum with of each cell
+					// Find maximum with of each column
 					var widths = [];
 					$($element).children().each(function() {
-						// Iterate of each cell in current row
+						// Skip ignored rows
+						if ($(this).hasClass('ignore'))
+							return;
+						// Iterate over each cell in current row
 						$(this).children().each(function(index) {
 							// Guarantee index bounds
 							while (index > widths.length - 1)

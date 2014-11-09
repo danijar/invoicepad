@@ -7,23 +7,23 @@ from django.db.models.query import QuerySet
 
 
 class Encoder(json.JSONEncoder):
-	def __init__(self, treats={}):
-		self.treats = treats
+	def __init__(self, json_traits={}):
+		self.json_traits = json_traits
 		super().__init__()
 
 	def default(self, obj):
-		if type(obj) in self.treats:
-			return self.treats[type(obj)](obj)
+		if type(obj) in self.json_traits:
+			return self.json_traits[type(obj)](obj)
 		return json.JSONEncoder.default(self, obj)
 
 
 class Ressource(object):
-	def __init__(self, model, allowed, summary=None, foreigns=[], treats={}):
+	def __init__(self, model, allowed, summary=None, foreign_models=[], json_traits={}):
 		self.model = model
 		self.allowed = allowed
 		self.summary = summary
-		self.foreigns = foreigns
-		self.encoder = Encoder(treats)
+		self.foreign_models = foreign_models
+		self.encoder = Encoder(json_traits)
 
 		# Fall back to allowed and id for summary
 		if summary:
@@ -43,7 +43,7 @@ class Ressource(object):
 
 		if request.method == 'GET' and id and foreign:
 			# Get list of entities this has a foreign key to
-			if not foreign in self.foreigns:
+			if not foreign in self.foreign_models:
 				return HttpResponseBadRequest()
 			entity = self.get(request.user, id)
 			if not hasattr(entity, foreign + '_set'):
@@ -111,7 +111,7 @@ class Ressource(object):
 		elif isinstance(data, QuerySet):
 			# Data is a queryset of an unknown model, so
 			# just convert it to a list
-			values = list(data)
+			values = list(data.values())
 		else:
 			# Data is unknown, perform no conversion
 			values = data

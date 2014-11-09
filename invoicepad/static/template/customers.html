@@ -17,6 +17,6 @@
 			<span><a href="{{ model.website }}" target="_blank">{{ model.website | domain }}</a></span>
 			<span><a href="mailto:<%= model.mail %>">{{ model.mail }}</a></span>
 		</li>
-		<li ng-hide="models.length" class="disabled center"><h3>No customers yet.</h3></li>
+		<li ng-hide="models.length" class="disabled center ignore"><h3>No customers yet.</h3></li>
 	</ul>
 </section>

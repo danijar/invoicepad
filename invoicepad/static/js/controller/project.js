@@ -35,6 +35,22 @@ define(['jquery', 'underscore', 'app', 'helper/message', 'css!style/project.css'
 					$scope.message = 'There was an error sending the request.';
 				});
 			});
+
+			// Fetch times from server
+			$.ajax({
+				dataType: 'json',
+				method: 'GET',
+				url: '/project/' + id + '/time/',
+			}).done(function(times) {
+				$scope.$apply(function() {
+					$scope.times = times;
+				});
+			}).error(function(e) {
+				$scope.$apply(function() {
+					console.error(e);
+					$scope.message = 'There was an error sending the request.';
+				});
+			});
 		}
 
 		function changes() {
@@ -143,6 +159,30 @@ define(['jquery', 'underscore', 'app', 'helper/message', 'css!style/project.css'
 			// Ask user to confirm if there are changes
 			if (!changed || confirm('Unsaved changes will be discarded.'))
 				$location.path('/project');
+		}
+
+		$scope.create_time = function() {
+			var content = {
+				project: id
+			};
+
+			// Send request to server
+			$.ajax({
+				dataType: 'json',
+				method: 'POST',
+				url: '/time/',
+				data: JSON.stringify(content),
+			}).done(function(time) {
+				$scope.$apply(function() {
+					// Add to list
+					$scope.times.push(time);
+				});
+			}).error(function(e) {
+				$scope.$apply(function() {
+					console.error(e);
+					$scope.message = 'There was an error sending the request.';
+				});
+			});
 		}
 
 		$scope.random = function() {

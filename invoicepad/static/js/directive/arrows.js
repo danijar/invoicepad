@@ -15,43 +15,43 @@ define(['app', 'jquery'], function(app, $) {
 
 		// Resolve text based jQuery selector
 		function select(element, query) {
-		    // Variables
-			var keywords = 'is find parent children first last next prev nextAll prevAll nextUntil prevUntil'.split(' ');
-		    var debug = '$(this)';
-		    var operation = '', filter = '';
-		    
-		    // Apply operation if available with filter as parameter
-		    var flush = function() {
-		        if (operation) {
-		            // Apply operation
-		            element = element[operation](filter || undefined);
-		            debug += '.' + operation + '(' + (filter ? '\'' + filter + '\'' : '') + ')';
-		            operation = '', filter = '';
-		        } else if (filter) {
-		             // Apply filter
-		            element = element.filter(filter);
-		            debug += '.filter(\'' + filter + '\')';
-		            filter = '';
-		        }   
-		    }
-		    
-		    // For each token
+			// Variables
+			var keywords = 'is find parent children first last next prev nextAll prevAll nextUntil prevUntil closest'.split(' ');
+			var debug = '$(this)';
+			var operation = '', filter = '';
+			
+			// Apply operation if available with filter as parameter
+			var flush = function() {
+				if (operation) {
+					// Apply operation
+					element = element[operation](filter || undefined);
+					debug += '.' + operation + '(' + (filter ? '\'' + filter + '\'' : '') + ')';
+					operation = '', filter = '';
+				} else if (filter) {
+					 // Apply filter
+					element = element.filter(filter);
+					debug += '.filter(\'' + filter + '\')';
+					filter = '';
+				}
+			}
+			
+			// For each token
 			_.each(query.split(' '), function(token) {
-		        if (_.contains(keywords, token)) {
-		            // Apply last operation with last parameter
-		            flush();       
-		            operation = token;
-		        } else {
-		            // Collect current filter
-		            filter += ' ' + token;
-		        }
+				if (_.contains(keywords, token)) {
+					// Apply last operation with last parameter
+					flush();       
+					operation = token;
+				} else {
+					// Collect current filter
+					filter += (filter ? ' ' : '') + token;
+				}
 			});
-		    
-		    // Apply last operation without parameter
-		    flush();
-		    
-		    debug += ';';
-		    console.log(debug);
+			
+			// Apply last operation without parameter
+			flush();
+			
+			debug += ';';
+			console.log(debug);
 			return element;
 		}
 
@@ -89,7 +89,7 @@ define(['app', 'jquery'], function(app, $) {
 			// Step in at first element
 			$element.on('focus', function(e) {
 				focus($(this).find(values.on).first());
-			});	
+			});
 
 			// Focus item when hovered
 			if (values.mouse)
