@@ -263,11 +263,26 @@ define(['jquery', 'underscore', 'app', 'helper/message', 'css!style/project.css'
 			if (typeof dict === 'object')
 				return Object.keys(dict).length;
 		}
-		
+
 		$scope.distance = function(from, to) {
+			if (!from)
+				return 0;
 			to = to || new Date();
 			return Math.round((to.getTime() - from.getTime()) / (1000 * 60));
 		}
+
+		// Sum of all times in hours
+		$scope.total = 0;
+		$scope.$watchCollection('times', function() {
+			if (!$scope.times)
+				return;
+			var sum = 0;
+			_.each($scope.times, function(time) {
+				sum += $scope.distance(time.start, time.end);
+			});
+			sum = Math.round(sum / 60);
+			$scope.total = sum;
+		});
 
 		$scope.random = function() {
 			// Generate title case words

@@ -28,6 +28,7 @@
 	<h2>Time</h2>
 	<span>
 		<a class="button add" ng-click="create_time()" tabindex="0">Add time</a>
+		Worked {{ total }} hours in total.
 	</span>
 	<span>
 		<ul class="table" relax
@@ -39,7 +40,7 @@
 				ng-class="{last: $index == dict_length(times) - 1}"
 				arrows="{on: 'input,.button', up: 'closest li', down: 'closest li', enter: false}">
 
-				<span><span class="time-elapsed">{{ distance(time.start, time.end) }}min</span></span>
+				<span><span class="time-elapsed" ng-init="t = distance(time.start, time.end)">{{ t || '0' }}min</span></span>
 				<span><input ng-model="time.message" type="text" placeholder="Enter message" class="time-message" ng-blur="save_time(time.id)"/></span>
 				<span class="icon time-start"><input type="text" ng-model="time.start" datetime ng-blur="save_time(time.id)"/></span>
 				<span class="icon time-end">
