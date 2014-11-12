@@ -27,32 +27,24 @@
 
 	<h2>Time</h2>
 	<span>
-		<a class="button" ng-click="create_time()" tabindex="0">Add time</a>
+		<a class="button add" ng-click="create_time()" tabindex="0">Add time</a>
 	</span>
 	<span>
-		<ul class="table"
-			arrow="{up: '.button', down: '.placeholder'}"
-			arrows="{on: 'li', up: 'prev', down: 'next :not(.ignore)', right: 'find input', mouse: false}"
-			relax>
+		<ul class="table" relax
+			arrow="{up: '.add', down: '.placeholder'}"
+			arrows="{on: 'li', up: 'prev', down: 'next :not(.ignore)', right: 'find input', mouse: false}">
 
 			<li ng-repeat="time in times | toArray | orderBy:'-start'"
 				class="time row-{{$index}}"
-				ng-class="{last: $index == dict_length(times) - 1}">
+				ng-class="{last: $index == dict_length(times) - 1}"
+				arrows="{on: 'input,.button', up: 'closest li', down: 'closest li', enter: false}">
 
 				<span><span class="time-elapsed">{{ distance(time.start, time.end) }}min</span></span>
-				<span><input ng-model="time.message"
-							 type="text"
-							 placeholder="Enter message"
-							 class="time-message"
-							 ng-blur="save_time(time.id)"
-							 arrow="{up: '.row-' + ($index - 1) + ' input', down: '.row-' + ($index + 1) + ' input', left: '.row-' + $index, right: '.row-' + $index + ' .button'}"/></span>
+				<span><input ng-model="time.message" type="text" placeholder="Enter message" class="time-message" ng-blur="save_time(time.id)"/></span>
 				<span class="icon time-start"><input type="text" ng-model="time.start" datetime ng-blur="save_time(time.id)"/></span>
 				<span class="icon time-end">
 					<input type="text" ng-model="time.end" datetime ng-show="time.end" ng-blur="save_time(time.id)"/>
-					<a class="button"
-					   ng-hide="time.end"
-					   ng-click="end_time(time.id)"
-					   arrow="{up: '.row-' + ($index - 1) + ' .button', down: '.row-' + ($index + 1) + ' .button', left: '.row-' + $index + ' input'}">End time</a>
+					<a class="button" ng-hide="time.end" ng-click="end_time(time.id)">End time</a>
 				</span>
 			</li>
 			<li ng-hide="dict_length(times) > 0" class="disabled center ignore"><h3>No times yet.</h3></li>

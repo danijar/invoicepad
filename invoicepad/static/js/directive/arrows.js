@@ -88,6 +88,8 @@ define(['app', 'jquery'], function(app, $) {
 
 			// Step in at first element
 			$element.on('focus', function(e) {
+				if ('enter' in values && !values.enter)
+					return;
 				focus($(this).find(values.on).first());
 			});
 
