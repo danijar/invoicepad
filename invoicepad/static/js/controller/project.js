@@ -47,6 +47,11 @@ define(['jquery', 'underscore', 'app', 'helper/message', 'css!style/project.css'
 					$scope.times = {};
 					$scope.initial_times = {};
 					_.each(times, function(time) {
+						// Parse dates
+						if ('start' in time && time.start)
+							time.start = new Date(time.start);
+						if ('end' in time && time.end)
+							time.end = new Date(time.end);
 						$scope.times[time.id] = time;
 						$scope.initial_times[time.id] = $.extend({}, time);
 					});
@@ -175,6 +180,11 @@ define(['jquery', 'underscore', 'app', 'helper/message', 'css!style/project.css'
 				data: JSON.stringify(content),
 			}).done(function(time) {
 				$scope.$apply(function() {
+					// Parse dates
+					if ('start' in time && time.start)
+						time.start = new Date(time.start);
+					if ('end' in time && time.end)
+						time.end = new Date(time.end);
 					// Add to scope
 					$scope.times[time.id] = time;
 					$scope.initial_times[time.id] = $.extend({}, time);
@@ -185,6 +195,11 @@ define(['jquery', 'underscore', 'app', 'helper/message', 'css!style/project.css'
 					$scope.message = 'There was an error sending the request.';
 				});
 			});
+		}
+
+		$scope.end_time = function(id) {
+			$scope.times[id].end = new Date();
+			$scope.save_time(id);
 		}
 
 		$scope.delete = function() {
@@ -245,11 +260,13 @@ define(['jquery', 'underscore', 'app', 'helper/message', 'css!style/project.css'
 
 		// Template helpers
 		$scope.dict_length = function(dict) {
-			if (typeof dict === 'object') {
-				console.log(Object.keys(dict));
+			if (typeof dict === 'object')
 				return Object.keys(dict).length;
-			}
-			return 0;
+		}
+		
+		$scope.distance = function(from, to) {
+			to = to || new Date();
+			return Math.round((to.getTime() - from.getTime()) / (1000 * 60));
 		}
 
 		$scope.random = function() {

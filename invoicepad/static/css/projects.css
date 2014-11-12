@@ -6,7 +6,6 @@
 
 /* table */
 .projects .hours, .projects .value { text-align: right; }
-.projects .agreement, .projects .finished, .projects .deadline { padding-left: 2em; background-repeat: no-repeat; background-size: auto 100%; }
 .projects .agreement { background-image: url(../img/project/agreement.png); }
 .projects .finished { background-image: url(../img/project/finished.png); }
 .projects .deadline { background-image: url(../img/project/deadline.png); }

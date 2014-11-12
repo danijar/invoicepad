@@ -3,8 +3,16 @@
 .project .actions .button { vertical-align: top; }
 
 /* form */
-input[type=date] { display: block; }
-input[type=checkbox] { margin-bottom: 0; }
+.project input[type=date] { display: block; }
+.project input[type=checkbox] { margin-bottom: 0; }
+
+/* times */
+.project .time .time-elapsed { display: inline-block; width: 4em; text-align: right; }
+.project .time .time-message { width: 20em; }
+.project .time .time-start { background-image: url(../img/project/start.png); }
+.project .time .time-end { background-image: url(../img/project/end.png); }
+.project input[type=text][datetime] { width: 9.3em; }
+.project .time .button { width: 6.3em; }
 
 /* message */
 .project .message { margin: 1.5em -1.5em -1.5em; }

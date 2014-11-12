@@ -36,16 +36,24 @@
 			relax>
 
 			<li ng-repeat="time in times | toArray | orderBy:'-start'"
-				class="row-{{$index}}"
+				class="time row-{{$index}}"
 				ng-class="{last: $index == dict_length(times) - 1}">
 
-				<span><span ng-init="elapsed = (time.end.getTime() - time.start.getTime()) / (1000 * 60)">{{ elapsed }}min</span></span>
+				<span><span class="time-elapsed">{{ distance(time.start, time.end) }}min</span></span>
 				<span><input ng-model="time.message"
 							 type="text"
+							 placeholder="Enter message"
+							 class="time-message"
 							 ng-blur="save_time(time.id)"
-							 arrow="{up: '.row-' + ($index - 1) + ' input', down: '.row-' + ($index + 1) + ' input', left: '.row-' + $index}"/></span>
-				<span>{{ time.start | date:'yyyy-MM-dd H:mm'}}</span>
-				<span>{{ time.end | date:'yyyy-MM-dd H:mm'}}</span>
+							 arrow="{up: '.row-' + ($index - 1) + ' input', down: '.row-' + ($index + 1) + ' input', left: '.row-' + $index, right: '.row-' + $index + ' .button'}"/></span>
+				<span class="icon time-start"><input type="text" ng-model="time.start" datetime ng-blur="save_time(time.id)"/></span>
+				<span class="icon time-end">
+					<input type="text" ng-model="time.end" datetime ng-show="time.end" ng-blur="save_time(time.id)"/>
+					<a class="button"
+					   ng-hide="time.end"
+					   ng-click="end_time(time.id)"
+					   arrow="{up: '.row-' + ($index - 1) + ' .button', down: '.row-' + ($index + 1) + ' .button', left: '.row-' + $index + ' input'}">End time</a>
+				</span>
 			</li>
 			<li ng-hide="dict_length(times) > 0" class="disabled center ignore"><h3>No times yet.</h3></li>
 		</ul>
