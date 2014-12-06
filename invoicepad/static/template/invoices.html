@@ -1,0 +1,19 @@
+<section class="invoices list">
+	<h1>Invoices</h1>
+	<div class="tools right">
+		<input ng-model="search" type="text" class="search" arrow="{down: 'ul', right: '.button'}" autofocus/>
+		<a ng-click="create()" class="button" arrow="{down: 'ul', left: 'input'}" tabindex="0">Create</a>
+	</div>
+
+	<p ng-show="message" class="message">{{ message }}</p>
+
+	<ul class="table" arrow="{up: 'input'}" arrows="{on: 'li', up: 'prev', down: 'next', mouse: true}" relax>
+		<li ng-repeat="model in models | orderBy:'counter' | filter:search">
+			<a href="/#/invoice/{{ model.id }}"><h2>{{ model.date || "No date" }}</h2></a>
+			<span class="icon customer" title="Deadline">{{ model.customer || "No customer" }}</span>
+			<span class="icon value" title="Agreement">{{ model.value | append:'€':"No value" }}</span>
+			<img class="icon sent" title="Invoice was sent" alt="Invoice was sent" ng-show="model.sent"/>
+		</li>
+		<li ng-hide="models.length" class="disabled center ignore"><h3>No invoices yet.</h3></li>
+	</ul>
+</section>

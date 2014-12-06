@@ -1,4 +1,4 @@
-define(['jquery', 'underscore', 'app', 'css!style/customers.css'], function($, _, app) {
+define(['jquery', 'underscore', 'app', 'css!style/list.css'], function($, _, app) {
 	app.controller('customers', ['$scope', '$routeParams', '$location', function($scope, $routeParams, $location) {
 
 		$scope.models = [];

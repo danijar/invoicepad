@@ -1,4 +1,4 @@
-define(['app', 'controller/dashboard', 'controller/console', 'controller/customers', 'controller/customer', 'controller/projects', 'controller/project'], function(app) {
+define(['app', 'controller/dashboard', 'controller/console', 'controller/customers', 'controller/customer', 'controller/projects', 'controller/project', 'controller/invoices', 'controller/invoice'], function(app) {
 	app.config(function($routeProvider) {
 		$routeProvider.when('/', {
 			controller: 'dashboard',
@@ -18,6 +18,12 @@ define(['app', 'controller/dashboard', 'controller/console', 'controller/custome
 		}).when('/project/:id', {
 			controller: 'project',
 			templateUrl: '/static/template/project.html'
+		}).when('/invoice', {
+			controller: 'invoices',
+			templateUrl: '/static/template/invoices.html'
+		}).when('/invoice/:id', {
+			controller: 'invoice',
+			templateUrl: '/static/template/invoice.html'
 		}).otherwise({
 			redirectTo: '/'
 		});

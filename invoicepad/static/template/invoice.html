@@ -1,0 +1,38 @@
+<section class="invoice">
+	<h1>{{ model.date | date:'yyyy-MM-dd' }}</h1>
+
+	<h2>General</h2>
+	<label>
+		Date
+		<input ng-model="model.date" type="date" autofocus/>
+	</label>
+	<label>
+		Customer
+		<select>
+			<!--option ng-repeat=""></option-->
+		</select>
+	</label>
+	<label>
+		Projects
+		<select multiple>
+			<!--option ng-repeat=""></option-->
+		</select>
+	</label>
+
+	<h2>PDF</h2>
+	<label>
+		URL to fetch new PDF
+		<input ng-model="model.pdf" type="url" class="pdf" arrow="{down: '.actions'}"/>
+	</label>
+	<div ng-show="model.pdf" class="pdf">
+		<!-- -->
+	</div><br>
+
+	<div class="actions" arrow="{up: '.logo'}" arrows="{on: 'a', left: 'prev', right: 'next'}">
+		<a ng-click="save()" class="button primary">Save</a>
+		<a ng-click="delete()" class="button">Delete</a>
+		<a ng-click="random()" class="button">Random</a>
+		<a ng-click="abort()" class="button">Abort</a>
+	</div>
+	<p ng-show="message" class="message">{{ message }}</p>
+</section>

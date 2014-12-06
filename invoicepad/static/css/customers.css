@@ -1,8 +1,0 @@
-/* tools */
-.customers h1 { display: inline-block; }
-.customers .tools > * { display: inline-block; vertical-align: middle; }
-.customers .tools input[type=text] { width: 15em; margin: 1px 1em 0 0; padding: .6em; }
-.customers .tools a.button { margin: 0; }
-
-/* message */
-.customers .message { margin-top: 0; }

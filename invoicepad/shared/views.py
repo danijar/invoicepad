@@ -7,13 +7,16 @@ from django.db.models.query import QuerySet
 
 
 class Encoder(json.JSONEncoder):
-	def __init__(self, json_traits={}):
-		self.json_traits = json_traits
+	def __init__(self, traits={}):
+		self.traits = traits
 		super().__init__()
 
 	def default(self, obj):
-		if type(obj) in self.json_traits:
-			return self.json_traits[type(obj)](obj)
+		if obj is None:
+			return ''
+		for trait, conversion in self.traits.items():
+			if isinstance(obj, trait):
+				return conversion(obj)
 		return json.JSONEncoder.default(self, obj)
 
 
@@ -80,8 +83,11 @@ class Ressource(object):
 
 	# Get dict from serialized request body
 	def parse(self, request):
-		values = json.loads(request.body.decode('utf-8'))
-		return values
+		if len(request.body):
+			content = request.body.decode('utf-8')
+			return json.loads(content)
+		else:
+			return {}
 
 	# Create new entity from model
 	def create(self, user, values):

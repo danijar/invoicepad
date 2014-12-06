@@ -1,5 +1,5 @@
-define(['jquery', 'underscore', 'app', 'css!style/list.css', 'css!style/projects.css'], function($, _, app) {
-	app.controller('projects', ['$scope', '$routeParams', '$location', function($scope, $routeParams, $location) {
+define(['jquery', 'underscore', 'app', 'css!style/list.css'], function($, _, app) {
+	app.controller('invoices', ['$scope', '$routeParams', '$location', function($scope, $routeParams, $location) {
 
 		$scope.models = [];
 
@@ -8,7 +8,7 @@ define(['jquery', 'underscore', 'app', 'css!style/list.css', 'css!style/projects
 			var deferred = $.ajax({
 				dataType: 'json',
 				method: 'GET',
-				url: '/project/',
+				url: '/invoice/',
 			});
 
 			// Inject into scope
@@ -25,17 +25,11 @@ define(['jquery', 'underscore', 'app', 'css!style/list.css', 'css!style/projects
 		}
 
 		$scope.create = function() {
-			// Properties of new model
-			var content = {
-				name: $scope.search || '',
-			};
-
 			// Request to create new model
 			var deferred = $.ajax({
 				dataType: 'json',
 				method: 'POST',
-				url: '/project/',
-				data: JSON.stringify(content),
+				url: '/invoice/'
 			});
 
 			// Sync back validated model
@@ -44,7 +38,7 @@ define(['jquery', 'underscore', 'app', 'css!style/list.css', 'css!style/projects
 					$scope.models.push(model);
 
 					// Head over to form
-					$location.path('/project/' + model.id);
+					$location.path('/invoice/' + model.id);
 				});
 			}).error(function(e) {
 				$scope.$apply(function() {

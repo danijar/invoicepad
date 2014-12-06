@@ -1,7 +1,8 @@
 from django.views.decorators.csrf import csrf_exempt
-from django.db.models.fields.files import ImageFieldFile
-from shared.views import Ressource
+from django.db.models.fields.files import FileField
 
+from shared.views import Ressource
+from shared.traits import default_traits
 from .models import Customer
 
 
@@ -9,6 +10,5 @@ from .models import Customer
 def customer(request, id):
 	allowed = ['name', 'fullname', 'address1', 'address2', 'address3', 'mail', 'website', 'notes', 'ustid', 'logo']
 	summary = ['id', 'name', 'website', 'mail', 'logo']
-	json_traits = {ImageFieldFile: (lambda x: x.url if x else None)}
-	ressource = Ressource(Customer, allowed, summary, json_traits=json_traits)
+	ressource = Ressource(Customer, allowed, summary, json_traits=default_traits)
 	return ressource.provide(request, id)

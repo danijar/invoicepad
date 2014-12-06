@@ -3,10 +3,10 @@ import urllib.request
 
 from django.core.files.base import ContentFile
 from django.db import models
-from django.db.models.fields.files import ImageFileDescriptor
+from django.db.models.fields.files import FileDescriptor
 
 
-class UrlImageFileDescriptor(ImageFileDescriptor):
+class UrlFileFieldDescriptor(FileDescriptor):
 	def __set__(self, instance, value):
 		# If a string is used for assignment, it is used as URL
 		# to fetch an image from and store it on the server.
@@ -16,20 +16,20 @@ class UrlImageFileDescriptor(ImageFileDescriptor):
 			PROTOCOLS = ['http', 'https', 'ftp']
 			if value.startswith(tuple(x + '://' for x in PROTOCOLS)):
 				try:
-					# Fetch image
+					# Fetch file
 					response = urllib.request.urlopen(value)
-					image = response.read()
+					data = response.read()
 					# Find file format
 					headers = response.info()
 					if 'Content-Type' in headers:
-						format = headers['Content-Type'].split('/')[1].strip()
+						extension = '.' + headers['Content-Type'].split('/')[1].strip()
 					elif '.' in value:
-						format = value.split('.')[-1]
+						extension = '.' + value.split('.')[-1]
 					else:
-						format = 'png'
+						extension = ''
 					# Create file from random name
-					name = str(uuid.uuid4()) + '.' + format
-					value = ContentFile(image, name)
+					name = str(uuid.uuid4()) + extension
+					value = ContentFile(data, name)
 				except:
 					# Anyway initialize field with None
 					print('Error fetching', value)
@@ -37,5 +37,5 @@ class UrlImageFileDescriptor(ImageFileDescriptor):
 		super().__set__(instance, value)
 
 
-class UrlImageField(models.ImageField):
-	descriptor_class = UrlImageFileDescriptor
+class UrlFileField(models.FileField):
+	descriptor_class = UrlFileFieldDescriptor

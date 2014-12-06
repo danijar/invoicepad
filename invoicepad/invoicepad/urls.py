@@ -16,6 +16,7 @@ urlpatterns = patterns('',
 	url(r'^customer/((?P<id>[0-9]+)/)?$', 'apps.customer.views.customer', name='customer'),
 	url(r'^project/((?P<id>[0-9]+)/((?P<foreign>[a-z]+)/)?)?$', 'apps.project.views.project', name='project'),
 	url(r'^time/((?P<id>[0-9]+)/)?$', 'apps.project.views.time', name='time'),
+	url(r'^invoice/((?P<id>[0-9]+)/)?$', 'apps.invoice.views.invoice', name='invoice'),
 )
 
 # Serve all media files publically

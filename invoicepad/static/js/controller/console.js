@@ -14,6 +14,12 @@ define(['jquery', 'underscore', 'app', 'css!style/console.css'], function($, _, 
 			{ name: 'Create project',  method: 'POST',   url: '/project/',     content: '{}' },
 			{ name: 'Update project',  method: 'PUT',    url: '/project/42/',  content: '{\n    "invoice": null,\n    "name": "",\n    "description": "",\n    "deadline": null,\n    "agreement": null,\n    "finished": null,\n    "value": 0,\n    "hours": 0\n}' },
 			{ name: 'Delete project',  method: 'DELETE', url: '/project/42/',  content: '' },
+			{ name: '',                method: '',       url: '',              content: '' },
+			{ name: 'All invoices',    method: 'GET',    url: '/invoice/',     content: '' },
+			{ name: 'Get invoice',     method: 'GET',    url: '/invoice/42/',  content: '' },
+			{ name: 'Create invoice',  method: 'POST',   url: '/invoice/',     content: '{}' },
+			{ name: 'Update invoice',  method: 'PUT',    url: '/invoice/42/',  content: '{\n    "customer": null,\n    "date": "2000-01-01",\n    "counter": 0,\n    "number": 0,\n    "value": null,\n    "pdf": null\n}' },
+			{ name: 'Delete invoice',  method: 'DELETE', url: '/invoice/42/',  content: '' },
 		];
 
 		$scope.send = function() {
