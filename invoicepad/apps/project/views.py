@@ -18,6 +18,5 @@ def project(request, id, foreign):
 def time(request, id):
 	allowed = ['project', 'message', 'start', 'end']
 	summary = ['id', 'project']
-	json_traits = {datetime.datetime: (lambda x: x.isoformat() if x else None)}
-	ressource = AttachedRessource(Time, 'project', allowed, summary, json_traits=json_traits)
+	ressource = AttachedRessource(Time, 'project', allowed, summary, json_traits=default_traits)
 	return ressource.provide(request, id)
