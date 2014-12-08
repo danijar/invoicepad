@@ -1,59 +1,22 @@
 define(['jquery', 'underscore', 'app', 'css!style/list.css'], function($, _, app) {
-	app.controller('customers', ['$scope', '$routeParams', '$location', function($scope, $routeParams, $location) {
-
-		$scope.models = [];
-
-		function load() {
-			// Fetch models from database
-			var deferred = $.ajax({
-				dataType: 'json',
-				method: 'GET',
-				url: '/customer/',
-			});
-
-			// Inject into scope
-			deferred.done(function(models) {
-				$scope.$apply(function() {
-					$scope.models = models;
-				});
-			}).error(function(e) {
-				$scope.$apply(function() {
-					console.error(e);
-					$scope.message = 'There was an error sending the request.';
-				});
-			});
+	app.controller('customers', ['$scope', '$routeParams', '$location', 'Models', function($scope, $routeParams, $location, Models) {
+		// Messages
+		$scope.message = '';
+		function requestError() {
+			var text = 'There was an error sending the request.';
+			$scope.message = text;
+			console.error(text);
 		}
 
+		// Connect to backend model
+		$scope.server = new Models('customer');
+		$scope.server.load().catch(requestError);
+
+		// Create new model
 		$scope.create = function() {
-			// Properties of new model
-			var content = {
-				name: $scope.search || '',
-			};
-
-			// Request to create new model
-			var deferred = $.ajax({
-				dataType: 'json',
-				method: 'POST',
-				url: '/customer/',
-				data: JSON.stringify(content),
-			});
-
-			// Sync back validated model
-			deferred.done(function(model) {
-				$scope.$apply(function() {
-					$scope.models.push(model);
-
-					// Head over to form
-					$location.path('/customer/' + model.id);
-				});
-			}).error(function(e) {
-				$scope.$apply(function() {
-					console.error(e);
-					$scope.message = 'There was an error sending the request.';
-				});
-			});
+			$scope.server.create().then(function(model) {
+				$location.path('/customer/' + model.id);
+			}, requestError);
 		};
-
-		load();
 	}]);
 });

@@ -8,7 +8,7 @@
 	<p ng-show="message" class="message">{{ message }}</p>
 
 	<ul class="table" arrow="{up: 'input'}" arrows="{on: 'li', up: 'prev', down: 'next', mouse: true}" relax>
-		<li ng-repeat="model in models | orderBy:'name' | filter:search">
+		<li ng-repeat="model in server.models | orderBy:'name' | filter:search">
 			<a ng-switch="!!model.logo" href="/#/customer/{{ model.id }}">
 				<div ng-switch-when="true" class="logo" style="background-image: url(/media/{{ model.logo }})"></div>
 				<div ng-switch-default     class="logo" style="background-image: url(/static/img/customer/logo.png)"></div>
@@ -17,6 +17,6 @@
 			<span><a href="{{ model.website }}" target="_blank">{{ model.website | domain }}</a></span>
 			<span><a href="mailto:<%= model.mail %>">{{ model.mail }}</a></span>
 		</li>
-		<li ng-hide="models.length" class="disabled center ignore"><h3>No customers yet.</h3></li>
+		<li ng-show="server.models | empty" class="disabled center ignore"><h3>No customers yet.</h3></li>
 	</ul>
 </section>

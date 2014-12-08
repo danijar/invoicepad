@@ -13,7 +13,7 @@ define(['jquery', 'underscore', 'app', 'helper/message', 'css!style/customer.css
 			console.error(text);
 		}
 
-		// Connect to backend model and update scope
+		// Connect to backend model
 		var fields = ['name', 'fullname', 'mail', 'website', 'address1', 'address2', 'address3', 'notes', 'logo'];
 		$scope.model = new Model('customer', $routeParams.id, fields);
 		$scope.model.load().catch(requestError);
@@ -45,7 +45,7 @@ define(['jquery', 'underscore', 'app', 'helper/message', 'css!style/customer.css
 			// Ask user to confirm if there are changes
 			if (!$scope.model.changed() || confirm('Unsaved changes will be discarded.'))
 				$location.path('/customer');
-		}
+		};
 
 		$scope.random = function() {
 			// Generate title case words
