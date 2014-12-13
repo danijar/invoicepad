@@ -2,10 +2,13 @@ Invoice Pad
 ===========
 
 Invoice Pad is a job management tool with time tracker, invoice generation and
-archiving solution. It is developed by Danijar Hafner.
+archiving solution. It uses Django in the backend and Angular in the frontend.
+Work's in progress.
 
-Setup
------
+![Screenshot](screenshot/2014-12-13.png?raw=true)
+
+Instructions
+------------
 
 Create a virtual environment inside the empty `<repository>/virtualenv`
 directory. The contents of this files are already excluded from versioning.
