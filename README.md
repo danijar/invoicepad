@@ -36,3 +36,9 @@ environment or using the according batch file from the tools directory.
 # Start Django server
 python manage.py runserver --nostatic 8000
 ```
+
+License
+-------
+
+This software is licensed under GNU GPL v3.0. See the
+[license file](LICENSE.md) for more information.
